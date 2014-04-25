@@ -1,0 +1,22 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: CentOS-6-x86_64-minimal
+    driver_config:
+      box: CentOS-6-x86_64-minimal
+      box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/CentOS-6-x86_64-minimal.box
+
+suites:
+  - name: default
+    run_list:
+      - recipe[java]
+      - recipe[opennms::default]
+    attributes:
+      java:
+        install_flavor: "openjdk"
+        jdk_version: "7"
