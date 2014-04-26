@@ -5,6 +5,9 @@ default['opennms']['release'] = 'stable'
 default['opennms']['jpda'] = 'false'
 default['opennms']['home'] = '/opt/opennms'
 
+# Postgres admin settings
+default['opennms']['postgres']['admin'] = 'postgres'
+
 # OpenNMS Postgres settings
 default['opennms']['dbhost'] = 'localhost'
 default['opennms']['dbport'] = '5432'
@@ -28,6 +31,7 @@ default['opennms']['rrd']['queuing']['inSigHighWaterMark'] = '0L'
 default['opennms']['rrd']['queuing']['sigHighWaterMark'] = '0L'
 default['opennms']['rrd']['queuing']['queueHighWaterMark'] = '0L'
 default['opennms']['rrd']['queuing']['writethread']['sleepTime'] = '50'
+default['opennms']['rrd']['queuing']['writethread']['exitDelay'] = '60000'
 default['opennms']['jrobin']['rrdBackendFactory'] = 'FILE'
 default['opennms']['rrd']['usetcp'] = 'false'
 default['opennms']['rrd']['tcp']['host'] = ''
@@ -68,11 +72,11 @@ default['opennms']['disableLoginSuccessEvent'] = 'false'
 # Mapping and Geocoding
 default['opennms']['maptype'] = 'OpenLayers'
 default['opennms']['apikey'] = ''
-default['opennms']['geocoderClass'] = 'org.opennms.features.poller.remote.gwt.server.geocoding.NullGeocoder'
-default['opennms']['geocoderRate'] = '10'
-default['opennms']['geocoderReferer'] = 'http://localhost'
-default['opennms']['geocoderMinimumQuality'] = 'ZIP'
-default['opennms']['geocoderNominatimEmail'] = ''
+default['opennms']['geocoder']['class'] = 'org.opennms.features.poller.remote.gwt.server.geocoding.NullGeocoder'
+default['opennms']['geocoder']['rate'] = '10'
+default['opennms']['geocoder']['referer'] = 'http://localhost'
+default['opennms']['geocoder']['minimumQuality'] = 'ZIP'
+default['opennms']['geocoder']['nominatimEmail'] = ''
 default['opennms']['openlayersUrl'] = 'http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png'
 
 # Reporting
@@ -93,7 +97,7 @@ default['opennms']['map']['client']['httpPostPassword'] = 'map'
 
 # SNMP implementation
 default['opennms']['snmp']['strategyClass'] = 'org.opennms.netmgt.snmp.snmp4j.Snmp4JStrategy'
-default['opennms']['snmp']['forwardRuntimeExceptions'] = 'false'
+default['opennms']['snmp4j']['forwardRuntimeExceptions'] = 'false'
 
 # SNMP Collector settings
 default['opennms']['snmpCollector']['forceRescan'] = 'false'
@@ -118,8 +122,8 @@ default['opennms']['datacollection']['reloadCheckInterval'] = '30000'
 default['opennms']['collectd']['threads'] = '50'
 
 # Pollerd settings
-default['opennms']['pollerd']['threads'] = '30'
-default['opennms']['pollerd']['unresponsiveEnabled'] = 'false'
-default['opennms']['pollerd']['nodeOutageStatus'] = 'on'
-default['opennms']['pollerd']['criticalService'] = 'ICMP'
+default['opennms']['poller']['threads'] = '30'
+default['opennms']['poller']['unresponsiveEnabled'] = 'false'
+default['opennms']['poller']['nodeOutageStatus'] = 'on'
+default['opennms']['poller']['criticalService'] = 'ICMP'
 

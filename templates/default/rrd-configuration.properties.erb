@@ -23,7 +23,7 @@ org.opennms.rrd.interfaceJar=/usr/share/java/jrrd.jar
 opennms.library.jrrd=/usr/lib/libjrrd.so
 #
 # The default setting is org.opennms.netmgt.rrd.jrobin.JRobinRrdStrategy
-org.opennms.rrd.strategyClass=<%= @rrdStrategyClass %>
+org.opennms.rrd.strategyClass=<%= @rrd_strategyClass %>
 
 #
 # This property allows the definition of a custom file extension to use for data files.
@@ -190,10 +190,10 @@ org.jrobin.core.RrdBackendFactory=<%= @rrdBackendFactory %>
 # If you would like to export performance data to an external system
 # over a TCP port, please set org.opennms.rrd.usetcp to 'true' and fill
 # in your values for the external listener.
-org.opennms.rrd.usetcp=<%= @rrd_usetcp %>
+org.opennms.rrd.usetcp=<%= @usetcp %>
 #
 # The IPv4 address or hostname of the target system
-org.opennms.rrd.tcp.host=<%= @rrd_tcp_host %>
+org.opennms.rrd.tcp.host=<%= @tcp_host %>
 #
 # The TCP port where the target system is listening for performance data
-org.opennms.rrd.tcp.port=<%= @rrd_tcp_port %>
+org.opennms.rrd.tcp.port=<%= @tcp_port %>
