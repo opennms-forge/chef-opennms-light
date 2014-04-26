@@ -15,15 +15,15 @@ platforms:
         enable_pgdg_yum: "true"
       opennms:
         home: "/opt/opennms"
-#  - name: Ubuntu-1404-x86_64-server
-#    driver_config:
-#      box: Ubuntu-1404-x86_64-server
-#      box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/Ubuntu-1404-x86_64-server.box
-#    attributes:
-#      postgresql:
-#        enable_pgdg_apt: "true"
-#      opennms:
-#        home: "/usr/share/opennms"
+  - name: Ubuntu-1404-x86_64-server
+    driver_config:
+      box: Ubuntu-1404-x86_64-server
+      box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/Ubuntu-1404-x86_64-server.box
+    attributes:
+      postgresql:
+        enable_pgdg_apt: "true"
+      opennms:
+        home: "/usr/share/opennms"
 suites:
   - name: default
     run_list:
