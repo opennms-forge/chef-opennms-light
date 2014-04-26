@@ -1,5 +1,9 @@
 opennms Cookbook
 ================
+[![Build Status](https://travis-ci.org/indigo423/chef-opennms.svg)](https://travis-ci.org/indigo423/chef-opennms)
+
+[travis]: https://travis-ci.org/indigo423/chef-opennms
+
 This cookbook installs the enterprise network management platform OpenNMS.
 
 Requirements
