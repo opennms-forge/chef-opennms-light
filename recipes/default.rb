@@ -42,6 +42,17 @@ template "#{node[:opennms][:home]}/etc/opennms.conf" do
   })
 end
 
+template "#{node[:opennms][:home]}/etc/opennms.properties" do
+  source "opennms.properties.erb"
+  owner "root"
+  group "root"
+  mode "0640"
+  variables({
+    :java_heap_space => node['opennms']['java-heap-space'],
+    :start_timeout => node['opennms']['start-timeout']
+  })
+end
+
 # Set Java environment for OpenNMS
 execute "Setup opennms java" do
   command "#{node[:opennms][:home]}/bin/runjava -s"
