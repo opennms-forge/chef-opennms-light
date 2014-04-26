@@ -8,28 +8,28 @@
 #
 
 case node[:platform]
-when "redhat", "centos", "fedora"
-  execute "Install OpenNMS yum repository" do
-    command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node[:opennms][:release]}-rhel6.noarch.rpm"
-    not_if { ::File.exist?("/etc/yum.repos.d/opennms-#{node[:opennms][:release]}-rhel6.repo")}
+when 'redhat', 'centos', 'fedora'
+  execute 'Install OpenNMS yum repository' do
+    command 'rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node[:opennms][:release]}-rhel6.noarch.rpm'
+    not_if { ::File.exist?('/etc/yum.repos.d/opennms-#{node[:opennms][:release]}-rhel6.repo') }
   end
 
-  execute "Update yum repostory" do
-    command "yum -y update"
+  execute 'Update yum repostory' do
+    command 'yum -y update'
   end
 end
 
-package "opennms" do
+package 'opennms' do
   action :install
 end
 
 # Install preconfigured configuration files for database connection
 # and OpenNMS
-template "#{node[:opennms][:home]}/etc/opennms-datasources.xml" do
-  source "opennms-datasources.xml.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/opennms-datasources.xml' do
+  source 'opennms-datasources.xml.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :opennms_dbhost => node['opennms']['dbhost'],
     :opennms_dbport => node['opennms']['dbport'],
@@ -41,11 +41,11 @@ template "#{node[:opennms][:home]}/etc/opennms-datasources.xml" do
 end
 
 # Configure start timeout and Java heap size
-template "#{node[:opennms][:home]}/etc/opennms.conf" do
-  source "opennms.conf.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/opennms.conf' do
+  source 'opennms.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :java_heap_space => node['opennms']['java-heap-space'],
     :start_timeout => node['opennms']['start-timeout']
@@ -53,22 +53,22 @@ template "#{node[:opennms][:home]}/etc/opennms.conf" do
 end
 
 # Set Java environment for OpenNMS
-execute "Setup opennms java" do
-  command "#{node[:opennms][:home]}/bin/runjava -s"
+execute 'Setup opennms java' do
+  command '#{node[:opennms][:home]}/bin/runjava -s'
   action :run
 end
 
 # Install OpenNMS database schema
-execute "Initialize OpenNMS database and libraries" do
-  command "#{node[:opennms][:home]}/bin/install -dis"
+execute 'Initialize OpenNMS database and libraries' do
+  command '#{node[:opennms][:home]}/bin/install -dis'
   action :run
 end
 
-template "#{node[:opennms][:home]}/etc/opennms.properties" do
-  source "opennms.properties.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/opennms.properties' do
+  source 'opennms.properties.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :snmp_strategyClass => node['opennms']['snmp']['strategyClass'],
     :snmp4j_forwardRuntimeExceptions => node['opennms']['snmp4j']['forwardRuntimeExceptions'],
@@ -121,11 +121,11 @@ template "#{node[:opennms][:home]}/etc/opennms.properties" do
 end
 
 # Configure Pollerd
-template "#{node[:opennms][:home]}/etc/poller-configuration.xml" do
-  source "poller-configuration.xml.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/poller-configuration.xml' do
+  source 'poller-configuration.xml.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :poller_threads => node['opennms']['poller']['threads'],
     :poller_unresponsiveEnabled => node['opennms']['poller']['unresponsiveEnabled'],
@@ -135,22 +135,22 @@ template "#{node[:opennms][:home]}/etc/poller-configuration.xml" do
 end
 
 # Configure Collectd
-template "#{node[:opennms][:home]}/etc/collectd-configuration.xml" do
-  source "collectd-configuration.xml.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/collectd-configuration.xml' do
+  source 'collectd-configuration.xml.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :collectd_threads => node['opennms']['collectd']['threads']
   })
 end
 
 # Configure Provisiond
-template "#{node[:opennms][:home]}/etc/provisiond-configuration.xml" do
-  source "provisiond-configuration.xml.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/provisiond-configuration.xml' do
+  source 'provisiond-configuration.xml.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :opennms_home => node['opennms']['home'],
     :provisiond_importThreads => node['opennms']['provisiond']['importThreads'],
@@ -161,11 +161,11 @@ template "#{node[:opennms][:home]}/etc/provisiond-configuration.xml" do
 end
 
 # Configure Timeseries data hanlding
-template "#{node[:opennms][:home]}/etc/rrd-configuration.properties" do
-  source "rrd-configuration.properties.erb"
-  owner "root"
-  group "root"
-  mode "0640"
+template '#{node[:opennms][:home]}/etc/rrd-configuration.properties' do
+  source 'rrd-configuration.properties.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
   variables({
     :opennms_home => node['opennms']['home'],
     :rrd_strategyClass => node['opennms']['rrd']['strategyClass'],
@@ -188,10 +188,10 @@ template "#{node[:opennms][:home]}/etc/rrd-configuration.properties" do
 end
 
 # Install opennms as service and set runlevel
-service "opennms" do
+service 'opennms' do
   supports :status => true, :restart => true, :reload => true
   if node[:opennms][:jpda]
-    start_command "service opennms -t start"
+    start_command 'service opennms -t start'
   end
   action [ :enable, :start ]
 end
