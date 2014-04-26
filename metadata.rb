@@ -8,7 +8,5 @@ version          '0.1.0'
 
 recipe 'opennms', 'Installs open source enterprise network management platform OpenNMS'
 
-depends 'apt'
-depends 'yum'
 depends 'java'
 depends 'postgresql'
