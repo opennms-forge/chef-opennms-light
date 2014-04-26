@@ -13,11 +13,23 @@ platforms:
     attributes:
       postgresql:
         enable_pgdg_yum: "true"
+      opennms:
+        home: "/opt/opennms"
+#  - name: Ubuntu-1404-x86_64-server
+#    driver_config:
+#      box: Ubuntu-1404-x86_64-server
+#      box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/Ubuntu-1404-x86_64-server.box
+#    attributes:
+#      postgresql:
+#        enable_pgdg_apt: "true"
+#      opennms:
+#        home: "/usr/share/opennms"
 suites:
   - name: default
     run_list:
       - recipe[java]
       - recipe[postgresql::server] 
+      - recipe[snmp]
       - recipe[opennms::default]
     attributes:
       java:
@@ -46,6 +58,14 @@ suites:
             user: "all"
             addr: "::1/128"
             method: "md5"
+      snmp:
+        community: "notpublic"
+        syscontact: "ronny@opennms.org"
+        syslocationVirtual: "In the virtual kitchen"
+        full_systemview: "true"
+        disks:
+          - mount: "/"
+            min: "100000"
       opennms:
         release: "stable"
         jpda: "false"

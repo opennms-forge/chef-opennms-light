@@ -1,11 +1,9 @@
 # Set the OpenNMS release: stable, testing, unstable, snapshot
 default['opennms']['release'] = 'stable'
 
-default['opennms']['user'] = 'opennms'
-default['opennms']['group'] = 'opennms'
-
 # Allow Java remote debugging on port 8001: true / false 
 default['opennms']['jpda'] = 'false'
+default['opennms']['home'] = '/opt/opennms'
 
 # Configure RRD technology: jrobin / rrdtool
 default['opennms']['rrd-tech'] = 'jrobin'
@@ -13,8 +11,8 @@ default['opennms']['storeByGroup'] = 'false'
 default['opennms']['storeByForeignId'] = 'false'
 
 # Start service and Java environment
-default['opennms']['start-timeout'] = '0'
 default['opennms']['java-heap-space'] = '1024'
+default['opennms']['start-timeout'] = '0'
 
 # Web UI display options
 default['opennms']['eventlist']['acknowledge'] = 'false'
