@@ -13,12 +13,30 @@ default['opennms']['dbuser'] = 'opennms'
 default['opennms']['dbpass'] = 'opennms'
 
 # Configure RRD technology: jrobin / rrdtool
+default['opennms']['library']['jrrd'] = '/usr/lib/libjrrd.so'
+default['opennms']['rrd']['strategyClass'] = 'org.opennms.netmgt.rrd.jrobin.JRobinRrdStrategy'
+default['opennms']['rrd']['interfaceJar'] = '/usr/share/java/jrrd.jar'
+
+# RRD detail tuning settings
+default['opennms']['rrd']['usequeue'] = 'true'
+default['opennms']['rrd']['queuing']['writethreads'] = '2'
+default['opennms']['rrd']['queuing']['queuecreates'] = 'false'
+default['opennms']['rrd']['queuing']['prioritizeSignificantUpdates'] = 'false'
+default['opennms']['rrd']['queuing']['maxInsigUpdateSeconds'] = '0'
+default['opennms']['rrd']['queuing']['modulus'] = '10000L'
+default['opennms']['rrd']['queuing']['inSigHighWaterMark'] = '0L'
+default['opennms']['rrd']['queuing']['sigHighWaterMark'] = '0L'
+default['opennms']['rrd']['queuing']['queueHighWaterMark'] = '0L'
+default['opennms']['rrd']['queuing']['writethread']['sleepTime'] = '50'
+default['opennms']['jrobin']['rrdBackendFactory'] = 'FILE'
+default['opennms']['rrd']['usetcp'] = 'false'
+default['opennms']['rrd']['tcp']['host'] = ''
+default['opennms']['rrd']['tcp']['port'] = ''
+
+# OpenNMS RRD/JRobin settings
 default['opennms']['storeByGroup'] = 'false'
 default['opennms']['storeByForeignSource'] = 'false'
 
-default['opennms']['rrd']['strategyClass'] = 'org.opennms.netmgt.rrd.jrobin.JRobinRrdStrategy'
-default['opennms']['rrd']['interfaceJar'] = '/usr/share/java/jrrd.jar'
-default['opennms']['library']['jrrd'] = '/usr/lib/libjrrd.so'
 
 # Start service and Java environment
 default['opennms']['java-heap-space'] = '1024'
