@@ -3,6 +3,7 @@
 .#*
 \#*#
 .*.sw[a-z]
+.DS_Store
 *.un~
 pkg/
 
