@@ -3,10 +3,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.opennms.org/xsd/config/provisiond-configuration"
 
-  foreign-source-dir="<%= @opennms_home %>/etc/foreign-sources"
-  requistion-dir="<%= @opennms_home %>/etc/imports"
+  foreign-source-dir="<%= node['opennms']['home']opennms_home %>/etc/foreign-sources"
+  requistion-dir="<%= node['opennms']['home'] %>/etc/imports"
 
-  importThreads="<%= @provisiond_importThreads %>" scanThreads="<%= @provisiond_scanThreads %>" rescanThreads="<%= @provisiond_rescanThreads %>" writeThreads="<%= @provisiond_writeThreads %>" >
+  importThreads="<%= node['opennms']['provisiond']['importThreads'] %>" scanThreads="<%= node['opennms']['provisiond']['scanThreads'] %>" rescanThreads="<%= node['opennms']['provisiond']['rescanThreads'] %>" writeThreads="<%= node['opennms']['provisiond']['writeThreads'] %>" >
 
   <!--
     http://quartz.sourceforge.net/javadoc/org/quartz/CronTrigger.html

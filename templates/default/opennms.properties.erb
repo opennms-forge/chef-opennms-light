@@ -57,7 +57,7 @@
 # the following line.
 #
 # Default:
-org.opennms.snmp.strategyClass=<%= @snmp_strategyClass %>
+org.opennms.snmp.strategyClass=<%= node['opennms']['snmp']['strategyClass'] %>
 #
 
 # The world is full of buggy SNMP agents.  We can work around many of their
@@ -71,7 +71,7 @@ org.snmp4j.smisyntaxes=opennms-snmp4j-smisyntaxes.properties
 # end up in output.log, so they're disabled by default, but they may provide
 # more information (albeit without timestamps) than the messages that SNMP4J
 # logs (see snmp4j.LogFactory)
-org.opennms.snmp.snmp4j.forwardRuntimeExceptions=<%= @snmp4j_forwardRuntimeExceptions %>
+org.opennms.snmp.snmp4j.forwardRuntimeExceptions=<%= node['opennms']['snmp4j']['forwardRuntimeExceptions'] %>
 
 # By default, SNMP4J does not do any logging internally, but it's easy to
 # enable.  See log4j.properties to adjust log levels for these messages.
@@ -95,7 +95,7 @@ org.opennms.snmp.workarounds.allow64BitIpAddress=true
 # 'true'.
 #
 # Default: false
-org.opennms.rrd.storeByGroup=<%= @storeByGroup %>
+org.opennms.rrd.storeByGroup=<%= node['opennms']['storeByGroup'] %>
 
 # By default, data collected for a node with nodeId n is stored in the
 # directory ${rrd.base.dir}/snmp/n . If the node is deleted and re-added,
@@ -113,10 +113,10 @@ org.opennms.rrd.storeByGroup=<%= @storeByGroup %>
 # of how many times the node may be deleted and re-added.
 #
 # Default: false
-org.opennms.rrd.storeByForeignSource=<%= @storeByForeignSource %>
+org.opennms.rrd.storeByForeignSource=<%= node['opennms']['storeByForeignSource'] %>
 
 # RRD base directory
-rrd.base.dir=<%= @opennms_home %>/share/rrd
+rrd.base.dir=<%= node['opennms']['home'] %>/share/rrd
 
 # RRD binary path (only used if the JniRrdStrategy is used)
 rrd.binary=/usr/bin/rrdtool
@@ -134,7 +134,7 @@ rrd.binary=/usr/bin/rrdtool
 # has been changed.
 #
 # Default: 30 seconds
-org.opennms.snmp.dataCollectionConfig.reloadCheckInterval=<%= @datacollection_reloadCheckInterval %>
+org.opennms.snmp.dataCollectionConfig.reloadCheckInterval=<%= node['opennms']['datacollection']['reloadCheckInterval'] %>
 
 #
 # Collectd Instrumentation class
@@ -145,7 +145,7 @@ org.opennms.snmp.dataCollectionConfig.reloadCheckInterval=<%= @datacollection_re
 # Check NMS-5806 for more details.
 #
 # Default: false
-org.opennms.utils.propertiesCache.enableCheckFileModified=<%= @enableCheckFileModified %>
+org.opennms.utils.propertiesCache.enableCheckFileModified=<%= node['opennms']['propertiesCache']['enableCheckFileModified'] %>
 
 ###### REMOTE METHOD INVOCATION ######
 # Though this is not strictly an OpenNMS property this is a setting that you
@@ -203,8 +203,8 @@ opennms.ticketer.plugin=org.opennms.netmgt.ticketd.NullTicketerPlugin
 ###### MISCELLANEOUS ######
 
 distributed.layoutApplicationsVertically=false
-opennms.bin.dir=<%= @opennms_home %>/bin
-opennms.webapplogs.dir=<%= @opennms_home %>/logs/webapp
+opennms.bin.dir=<%= node['opennms']['home']  %>/bin
+opennms.webapplogs.dir=<%= node['opennms']['home']  %>/logs/webapp
 java.awt.headless=true
 
 # findByServiceType query
@@ -214,23 +214,23 @@ java.awt.headless=true
 # org.opennms.netmgt.collectd.DefaultCollectionAgent.loadSnmpDataOnInit=false
 
 ###### REPORTING ######
-opennms.report.template.dir=<%= @opennms_home %>/etc
-opennms.report.dir=<%= @opennms_home %>/share/reports
-opennms.report.logo=<%= @opennms_home %>/webapps/images/logo.gif
-ksc.default.graphsPerLine=<%= @ksc_graphsPerLine %>
+opennms.report.template.dir=<%= node['opennms']['home']  %>/etc
+opennms.report.dir=<%= node['opennms']['home'] %>/share/reports
+opennms.report.logo=<%= node['opennms']['home'] %>/webapps/images/logo.gif
+ksc.default.graphsPerLine=<%= node['opennms']['ksc']['graphsPerLine'] %>
 
 ###### EVENTD IPC ######
 # The hostname or IP address of the OpenNMS server where events should be sent.
 # Default: 127.0.0.1
-opennms.rtc.event.proxy.host=<%= @rtc_event_proxy_host %>
+opennms.rtc.event.proxy.host=<%= node['opennms']['rtc']['event']['proxyHost'] %>
 
 # The TCP port for the eventd TCP receiver where events should be sent.
 # Default: 5817
-opennms.rtc.event.proxy.port=<%= @rtc_event_proxy_port %>
+opennms.rtc.event.proxy.port=<%= node['opennms']['rtc']['event']['proxyPort'] %>
 
 # The timeout in milliseconds the proxy will wait to complete a TCP connection.
 # Default: 2000
-opennms.rtc.event.proxy.timeout=<%= @rtc_event_proxy_timeout %>
+opennms.rtc.event.proxy.timeout=<%= node['opennms']['rtc']['event']['proxyTimeout'] %>
 
 ###### RANCID INTEGRATION ######
 # Set to true the followiing property to enable the integration to Rancid in the WEB UI.
@@ -245,29 +245,29 @@ opennms.rtc.event.proxy.timeout=<%= @rtc_event_proxy_timeout %>
 # The base of a URL that RTC clients use when creating a RTC subscription URL.
 # If you are using Tomcat instead of the built-in Jetty, change this in
 # WEB-INF/configuration.properties instead.
-opennms.rtc-client.http-post.base-url = <%= @rtc_client_httpPost_baseUrl %>
+opennms.rtc-client.http-post.base-url = <%= node['opennms']['rtc']['client']['httpPostBaseUrl'] %>
 
 # The username the RTC uses when authenticating itself in an HTTP POST.
-opennms.rtc-client.http-post.username = <%= @rtc_client_httpPost_username %>
+opennms.rtc-client.http-post.username = <%= node['opennms']['rtc']['client']['httpPostUsername'] %>
 
 # The password the RTC uses when authenticating itself in an HTTP POST.
-opennms.rtc-client.http-post.password = <%= @rtc_client_httpPost_password %>
+opennms.rtc-client.http-post.password = <%= node['opennms']['rtc']['client']['httpPostPassword'] %>
 
 ###### MAP IPC ######
 # The base of a URL that Map System clients use when creating a Map subscription URL.
 # If you are using Tomcat instead of the built-in Jetty, change this in
 # WEB-INF/configuration.properties instead.
-opennms.map-client.http-post.url = <%= @map_client_httpPost_baseUrl %>
+opennms.map-client.http-post.url = <%= node['opennms']['map']['client']['httpPostBaseUrl'] %>
 
 # The username the Map System uses when authenticating itself in an HTTP POST.
-opennms.map-client.http-post.username = <%= @map_client_httpPost_username %>
+opennms.map-client.http-post.username = <%= node['opennms']['map']['client']['httpPostUsername'] %>
 
 # The password the Map System uses when authenticating itself in an HTTP POST.
-opennms.map-client.http-post.password = <%= @map_client_httpPost_password %>
+opennms.map-client.http-post.password = <%= node['opennms']['map']['client']['httpPostPassword'] %>
 
 ###### JETTY WEB UI ######
 # If you are using Jetty, this is the port to listen on
-org.opennms.netmgt.jetty.port = <%= @jetty_port %>
+org.opennms.netmgt.jetty.port = <%= node['opennms']['jetty']['port'] %>
 # If you want Jetty with AJP support, this is the port to listen on
 #org.opennms.netmgt.jetty.ajp-port = 8981
 # By default, Jetty will listen on all interfaces. You can set a specific
@@ -286,11 +286,11 @@ org.opennms.netmgt.jetty.port = <%= @jetty_port %>
 
 # This sets the request header size for jetty.
 # The default value is 4000 bytes.
-org.opennms.netmgt.jetty.requestHeaderSize=<%= @requestHeaderSize %>
+org.opennms.netmgt.jetty.requestHeaderSize=<%= node['opennms']['jetty']['requestHeaderSize'] %>
 
 # This sets the maximum number of items that can be in web forms (like the
 # Provisioning web UI)
-org.eclipse.jetty.server.Request.maxFormKeys=<%= @maxFormKeys %>
+org.eclipse.jetty.server.Request.maxFormKeys=<%= node['opennms']['jetty']['maxFormKeys'] %>
 
 ###### JETTY HTTPS SUPPORT ######
 # Details: http://www.opennms.org/index.php/Standalone_HTTPS_with_Jetty
@@ -341,7 +341,7 @@ org.eclipse.jetty.server.Request.maxFormKeys=<%= @maxFormKeys %>
 #         ProxyPassReverse http://127.0.0.1:8980/opennms
 #     </Location>
 #
-opennms.web.base-url = <%= @web_baseurl %>
+opennms.web.base-url = <%= node['opennms']['web']['baseurl'] %>
 
 ###### ASTERISK AGI SUPPORT ######
 # If you are using the built-in Asterisk Gateway Interface (AGI) server
@@ -370,11 +370,11 @@ opennms.web.base-url = <%= @web_baseurl %>
 # names can be obtained by exporting all asset data to a CSV file from the web UI.
 #
 # This example would allow HTML markup in the Comments and Description fields.
-opennms.assets.allowHtmlFields = <%= @assets_allowHtmlFields %>
+opennms.assets.allowHtmlFields = <%= node['opennms']['assets']['allowHtmlFields'] %>
 
 #Control sending force rescans from the SNMP Collector.  The default is now
 #false and used to be true.
-org.opennms.netmgt.collectd.SnmpCollector.forceRescan = <%= @forceResan %>
+org.opennms.netmgt.collectd.SnmpCollector.forceRescan = <%= node['opennms']['snmpCollector']['forceRescan'] %>
 
 #
 # For systems with very large numbers of interfaces we may be unable to collect all the
@@ -382,14 +382,14 @@ org.opennms.netmgt.collectd.SnmpCollector.forceRescan = <%= @forceResan %>
 # are being collected then we can limit the collection to only those instances and save collection
 # time but possible 'getting' confused by instance changes
 # Set this to true to enable instance limiting
-org.opennms.netmgt.collectd.SnmpCollector.limitCollectionToInstances=<%= @limitCollectionToInstances %>
+org.opennms.netmgt.collectd.SnmpCollector.limitCollectionToInstances=<%= node['opennms']['snmpCollector']['limitCollectionToInstances'] %>
 
 #
 # This property is for enabling acl support in the webapp.  With ACLs enabled then Nodes, Alarms, Events etc
 # are filtered according to the authorzied groups list on onms categories.  In other words.  For a user to
 # set the events, outages etc for a particular node then that user has to be authorized for a category that the node
 # belongs to
-org.opennms.web.aclsEnabled=<%= @web_aclsEnabled %>
+org.opennms.web.aclsEnabled=<%= node['opennms']['webaclsEnabled'] %>
 
 # IP address of the DNS server that the DnsProvisioningAdapter
 # should send dynamic DNS updates to
@@ -415,7 +415,7 @@ smslib.serial.polling=true
 # This property is used to enable/disable the handling of new suspect events
 # in provisiond along with periodic scanning of discovered nodes.  The default
 # setting is true (See org.opennms.netmgt.provision.service.ProvisionService)
-org.opennms.provisiond.enableDiscovery=<%= @provisiond_enableDiscovery %>
+org.opennms.provisiond.enableDiscovery=<%= node['opennms']['provisiond']['enableDiscovery'] %>
 
 # Prior to 1.10 it was possible to delete entities that have been provisioned as
 # part of a provisioning group.  In 1.10 we have disabled this so that in order to
@@ -423,28 +423,28 @@ org.opennms.provisiond.enableDiscovery=<%= @provisiond_enableDiscovery %>
 # from there.  To reenable this deletion you can set this to true.
 # NOTE: if you do this then the object will be recreated when the provisioning group is
 # next imported/synchronized
-org.opennms.provisiond.enableDeletionOfRequisitionedEntities=<%= @provisiond_enableDeletionOfRequisitionedEntities %>
+org.opennms.provisiond.enableDeletionOfRequisitionedEntities=<%= node['opennms']['provisiond']['enableDeletionOfRequisitionedEntities'] %>
 
 # This property is used to control the rescan scheduling existing nodes in
 # the database when Provisiond starts. The default value is true.
 # There are situations like distributed environments, where OpenNMS is deployed across
 # multiple servers, on which this feature must be disabled to avoid continuity issues.
 # In this scenario, most likely the inventory of nodes should not be managed by all OpenNMS instances.
-org.opennms.provisiond.scheduleRescanForExistingNodes=<%= @provisiond_scheduleRescanForExistingNodes %>
+org.opennms.provisiond.scheduleRescanForExistingNodes=<%= node['opennms']['provisiond']['scheduleRescanForExistingNodes'] %>
 
 # Use this property to disable rescans of existing nodes following
 # an import (synchronize) of a provisioning group (requistion).  Default
 # behavior has always been true.
-org.opennms.provisiond.scheduleRescanForUpdatedNodes=<%= @provisiond_scheduleRescanForUpdatedNodes %>
+org.opennms.provisiond.scheduleRescanForUpdatedNodes=<%= node['opennms']['provisiond']['scheduleRescanForUpdatedNodes'] %>
 
 ###### MAPPING AND GEOCODING ######
 
 # the map implementation to use
 # current choices are: GoogleMaps, Mapquest, OpenLayers
-gwt.maptype=<%= @gwt_maptype %>
+gwt.maptype=<%= node['opennms']['maptype'] %>
 
 # The API key to use for the remote monitor map
-gwt.apikey=<%= @gwt_apikey %>
+gwt.apikey=<%= node['opennms']['apikey'] %>
 
 # The class options to use for geocoding.  Choices are:
 
@@ -458,24 +458,24 @@ gwt.apikey=<%= @gwt_apikey %>
 #gwt.geocoder.class=org.opennms.features.poller.remote.gwt.server.geocoding.NominatimGeocoder
 
 # (always return OpenNMS World HQ)
-gwt.geocoder.class=<%= @geocoder_class %>
+gwt.geocoder.class=<%= node['opennms']['geocoder']['class'] %>
 
 # The rate at which to make requests, for geocoders that support it.
-gwt.geocoder.rate=<%= @geocoder_rate %>
+gwt.geocoder.rate=<%= node['opennms']['geocoder']['rate'] %>
 
 # The referer to use when making geocoding requests, for geocoders that support it.
 # For MapQuest, the value you set here will need to be allowed in your AppKeys manager:
 #   http://developer.mapquest.com/web/info/account/app-keys
-gwt.geocoder.referer=<%= @geocoder_referer %>
+gwt.geocoder.referer=<%= node['opennms']['geocoder']['referer'] %>
 
 # The minimum quality level to require before rejecting a geocoding request.
 # This is currently only used by MapQuest. Choices are (least to most specific):
 # COUNTRY, STATE, ZIP, COUNTY, ZIP_EXTENDED, CITY, STREET, INTERSECTION, ADDRESS, POINT
-gwt.geocoder.minimumQuality=<%= @geocoder_minimumQuality %>
+gwt.geocoder.minimumQuality=<%= node['opennms']['geocoder']['minimumQuality'] %>
 
 # The email address to report as when making geocoding requests.
 # This is currently only used by Nominatim, and MUST be set!
-gwt.geocoder.email=<%= @geocoder_nominatimEmail %>
+gwt.geocoder.email=<%= node['opennms']['geocoder']['nominatimEmail'] %>
 
 # The tile server URL to use for OpenLayers.  This can be any mapnik-style tile server URL.
 # (Sorry, no support for multiple URLs yet.)
@@ -484,45 +484,45 @@ gwt.geocoder.email=<%= @geocoder_nominatimEmail %>
 # gwt.openlayers.url=http://a.tile.openstreetmap.org/${z}/${x}/${y}.png
 
 # Open MapQuest tile server
-gwt.openlayers.url=<%= @openlayers_url %>
+gwt.openlayers.url=<%= node['opennms']['openlayersUrl'] %>
 
 ###### UI DISPLAY OPTIONS ######
 
 # This value allows you to show or hide the Acknowledge event button. This is only
 # here for those who still acknowledge events. We are moving away from this and
 # towards acknowledging alarms instead of events. Default is false
-opennms.eventlist.acknowledge=<%= @eventlist_acknowledge %>
+opennms.eventlist.acknowledge=<%= node['opennms']['eventlist']['acknowledge'] %>
 
 # This value allows you to configure whether or not the total event count is shown
 # in the event list in the web UI.  Setting this to 'true' can cause severe performance
 # issues for larger installations.
-opennms.eventlist.showCount=<%= @eventlist_showCount %>
+opennms.eventlist.showCount=<%= node['opennms']['eventlist']['showCount'] %>
 
 # This value allows you to set the number of nodes with outages to display on the front
 # page in the OpenNMS web UI. Default 12
-opennms.nodesWithOutages.count=<%= @nodesWithOutages_count %>
+opennms.nodesWithOutages.count=<%= node['opennms']['nodesWithOutages']['count'] %>
 
 # This value allows you to enable/disable the nodes with outages box on the front
 # page in the OpenNMS web UI. Default: true
-opennms.nodesWithOutages.show=<%= @nodesWithOutages_show %>
+opennms.nodesWithOutages.show=<%= node['opennms']['nodesWithOutages']['show'] %>
 
 # This value allows you to set the number of nodes with problems to display on the front
 # page in the OpenNMS web UI. Default: 16
-opennms.nodesWithProblems.count=<%= @nodesWithProblems_count %>
+opennms.nodesWithProblems.count=<%= node['opennms']['nodesWithProblems']['count'] %>
 
 # This value allows you to enable/disable the nodes with problems box on the front
 # page in the OpenNMS web UI. Default: false
 #
-opennms.nodesWithProblems.show=<%= @nodesWithProblems_show %>
+opennms.nodesWithProblems.show=<%= node['opennms']['nodesWithProblems']['show'] %>
 
 # This value allows you to enable/disable the status bar resume at the top of the node
 # page in the OpenNMS web UI. Default: false
 #
-opennms.nodeStatusBar.show=<%= @nodesStatusBar_show %>
+opennms.nodeStatusBar.show=<%= node['opennms']['nodeStatusBar']['show'] %>
 
 # This value disables the sending of successful login events.  The default is to send the
 # event.  Change this value to true to disable the publishing of this event.
-org.opennms.security.disableLoginSuccessEvent=<%= @disableLoginSuccessEvent %>
+org.opennms.security.disableLoginSuccessEvent=<%= node['opennms']['disableLoginSuccessEvent'] %>
 
 ###### REMOTE POLLER BACKEND SETTINGS ######
 
@@ -530,7 +530,7 @@ org.opennms.security.disableLoginSuccessEvent=<%= @disableLoginSuccessEvent %>
 # in milliseconds because of global changes.  This value should never be set
 # less the 300000 (5 minutes) except to set it to zero which means never only reload the
 # configuration if the location monitors status has been set to CONFIG_CHANGED.
-opennms.pollerBackend.minimumConfigurationReloadInterval=<%= @minimumConfigurationReloadInterval %>
+opennms.pollerBackend.minimumConfigurationReloadInterval=<%= node['opennms']['minimumConfigurationReloadInterval'] %>
 
 ###### JASPER REPORTS VERSION  ######
 org.opennms.jasperReportsVersion=3.7.6
@@ -549,4 +549,4 @@ org.opennms.jasperReportsVersion=3.7.6
 # Without this setting, the remote poller will crash on startup (see issue NMS-5777)
 # even if none of the problematic services appears in any package. If you create custom
 # services, you may need to add them to this list.
-excludeServiceMonitorsFromRemotePoller=<%= @excludeServiceMonitorsFromRemotePoller %>
+excludeServiceMonitorsFromRemotePoller=<%= node['opennms']['excludeServiceMonitorsFromRemotePoller'] %>

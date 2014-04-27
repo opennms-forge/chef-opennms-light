@@ -23,7 +23,7 @@ org.opennms.rrd.interfaceJar=/usr/share/java/jrrd.jar
 opennms.library.jrrd=/usr/lib/libjrrd.so
 #
 # The default setting is org.opennms.netmgt.rrd.jrobin.JRobinRrdStrategy
-org.opennms.rrd.strategyClass=<%= @rrd_strategyClass %>
+org.opennms.rrd.strategyClass=<%= node['opennms']['rrd']['strategyClass'] %>
 
 #
 # This property allows the definition of a custom file extension to use for data files.
@@ -45,7 +45,7 @@ org.opennms.rrd.strategyClass=<%= @rrd_strategyClass %>
 # This leads to greater amortized performance of the I/O system.
 #
 # The default setting is true (use the queuing system)
-org.opennms.rrd.usequeue=<%= @usequeue %>
+org.opennms.rrd.usequeue=<%= node['opennms']['rrd']['usequeue'] %>
 
 #
 # The following properties are for the queuing system
@@ -60,7 +60,7 @@ org.opennms.rrd.usequeue=<%= @usequeue %>
 # system where this is not true.
 #
 # The default setting is 2
-org.opennms.rrd.queuing.writethreads=<%= @writethreads %>
+org.opennms.rrd.queuing.writethreads=<%= node['opennms']['rrd']['queuing']['writethreads'] %>
 
 #
 # This property defines whether creates should be processed immediately or enqueued.
@@ -74,7 +74,7 @@ org.opennms.rrd.queuing.writethreads=<%= @writethreads %>
 # recommended that this be changed until the bug is fixed!
 #
 # The default setting is false (don't enqueue the creates)
-org.opennms.rrd.queuing.queuecreates=<%= @queuecreates %>
+org.opennms.rrd.queuing.queuecreates=<%= node['opennms']['rrd']['queuing']['queuecreates'] %>
 
 #
 # The queuing system distinguishes between zero valued and non-zero valued updates.
@@ -92,7 +92,7 @@ org.opennms.rrd.queuing.queuecreates=<%= @queuecreates %>
 # Given this situation there is an inherent 'unfairness' which on busy systems will
 # cause the files with only insignificant updates to never get written.
 #
-org.opennms.rrd.queuing.prioritizeSignificantUpdates=<%= @prioritizeSignificantUpdates %>
+org.opennms.rrd.queuing.prioritizeSignificantUpdates=<%= node['opennms']['rrd']['queuing']['prioritizeSignificantUpdates'] %>
 
 # This property represents the number of seconds over which (on average) all
 # insignificant files will be promoted to the significant list.  This ensures that
@@ -104,7 +104,7 @@ org.opennms.rrd.queuing.prioritizeSignificantUpdates=<%= @prioritizeSignificantU
 # Setting the value to 0 means don't promote insignificant files at all.
 #
 # The default setting is 0 (don't promote insignificant files).
-org.opennms.rrd.queuing.maxInsigUpdateSeconds=<%= @maxInsigUpdateSeconds %>
+org.opennms.rrd.queuing.maxInsigUpdateSeconds=<%= node['opennms']['rrd']['queuing']['maxInsigUpdateSeconds'] %>
 
 #
 # This queuing system regularly prints statistics regarding queue size, pending
@@ -115,7 +115,7 @@ org.opennms.rrd.queuing.maxInsigUpdateSeconds=<%= @maxInsigUpdateSeconds %>
 # If (updateCount % modulus) == 0 then printStats;
 #
 # The default setting is 10000L
-org.opennms.rrd.queuing.modulus=<%= @modulus %>
+org.opennms.rrd.queuing.modulus=<%= node['opennms']['rrd']['queuing']['modulus'] %>
 
 # On some very large installations it is possible to overwhelm the I/O system of the
 # the NMS and continue queuing data until all of the JVM memory is used up.  The next
@@ -130,7 +130,7 @@ org.opennms.rrd.queuing.modulus=<%= @modulus %>
 # sufficient to keep your system from becoming overwhelmed.
 #
 # The default value is 0L (don't discard insignificant operations)
-org.opennms.rrd.queuing.inSigHighWaterMark=<%= @inSigHighWaterMark %>
+org.opennms.rrd.queuing.inSigHighWaterMark=<%= node['opennms']['rrd']['queuing']['inSigHighWaterMark'] %>
 
 #
 # When the totalOpsPending value reaches or is higher than the value of the below
@@ -139,7 +139,7 @@ org.opennms.rrd.queuing.inSigHighWaterMark=<%= @inSigHighWaterMark %>
 # insignificant operations.
 #
 # The default value is 0L (don't discard significant operations
-org.opennms.rrd.queuing.sigHighWaterMark=<%= @sigHighWaterMark %>
+org.opennms.rrd.queuing.sigHighWaterMark=<%= node['opennms']['rrd']['queuing']['sigHighWaterMark'] %>
 
 #
 # When the totalOpsPending value reaches or is higher than the value of the below
@@ -148,7 +148,7 @@ org.opennms.rrd.queuing.sigHighWaterMark=<%= @sigHighWaterMark %>
 # crashing the JVM.
 #
 # The default value is 0L (don't discard operations)
-org.opennms.rrd.queuing.queueHighWaterMark=<%= @queueHighWaterMark %> 
+org.opennms.rrd.queuing.queueHighWaterMark=<%= node['opennms']['rrd']['queuing']['queueHighWaterMark'] %> 
 
 
 #
@@ -163,8 +163,8 @@ org.opennms.rrd.queuing.queueHighWaterMark=<%= @queueHighWaterMark %>
 # it exits.  You probably don't need to change these.  Changing these values will
 # void your warranty.  grins.
 #
-org.opennms.rrd.queuing.writethread.sleepTime=<%= @writethread_sleeptime %>
-org.opennms.rrd.queuing.writethread.exitDelay=<%= @writethread_exitDelay %>
+org.opennms.rrd.queuing.writethread.sleepTime=<%= node['opennms']['rrd']['queuing']['writethread']['sleepTime'] %>
+org.opennms.rrd.queuing.writethread.exitDelay=<%= node['opennms']['rrd']['queuing']['writethread']['exitDelay'] %>
 
 #
 # The following property sets the default JRobin backend Factory.  Acceptable values are
@@ -183,17 +183,17 @@ org.opennms.rrd.queuing.writethread.exitDelay=<%= @writethread_exitDelay %>
 # SAFE - Aggressive locking and low levels of caching.  Untested.
 # MEMORY - In-memory only.
 # NIO - MMAPped RRDs, using NIO.
-org.jrobin.core.RrdBackendFactory=<%= @rrdBackendFactory %>
+org.jrobin.core.RrdBackendFactory=<%= node['opennms']['jrobin']['rrdBackendFactory'] %>
 
 
 #
 # If you would like to export performance data to an external system
 # over a TCP port, please set org.opennms.rrd.usetcp to 'true' and fill
 # in your values for the external listener.
-org.opennms.rrd.usetcp=<%= @usetcp %>
+org.opennms.rrd.usetcp=<%= node['opennms']['rrd']['usetcp'] %>
 #
 # The IPv4 address or hostname of the target system
-org.opennms.rrd.tcp.host=<%= @tcp_host %>
+org.opennms.rrd.tcp.host=<%= node['opennms']['rrd']['tcp']['host'] %>
 #
 # The TCP port where the target system is listening for performance data
-org.opennms.rrd.tcp.port=<%= @tcp_port %>
+org.opennms.rrd.tcp.port=<%= node['opennms']['rrd']['tcp']['port'] %>

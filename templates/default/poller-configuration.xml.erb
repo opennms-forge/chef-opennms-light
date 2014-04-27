@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?castor class-name="org.opennms.netmgt.poller.PollerConfiguration"?>
-<poller-configuration threads="<%= @poller_threads %>"
-                      serviceUnresponsiveEnabled="<%= @poller_unresponsiveEnabled %>">
-  <node-outage status="<%= @poller_nodeOutageStatus %>">
-    <critical-service name="<%= @poller_criticalService %>" />
+<poller-configuration threads="<%= node['opennms']['poller']['threads'] %>"
+                      serviceUnresponsiveEnabled="<%= node['opennms']['poller']['unresponsiveEnabled'] %>">
+  <node-outage status="<%= node['opennms']['poller']['nodeOutageStatus'] %>">
+    <critical-service name="<%= node['opennms']['poller']['criticalService'] %>" />
   </node-outage>
   <package name="example1">
     <filter>IPADDR != '0.0.0.0'</filter>
