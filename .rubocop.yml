@@ -1,17 +1,4 @@
-AllCops:
-  Exclude:
-    - vendor/**
-
-ClassLength:
-  Enabled: false
-Documentation:
-  Enabled: false
 Encoding:
-  Enabled: false
+  Enabled: False
 LineLength:
-  Enabled: false
-MethodLength:
-  Enabled: false
-TrailingComma:
-  EnforcedStyleForMultiline: comma
-
+  Max: 200
