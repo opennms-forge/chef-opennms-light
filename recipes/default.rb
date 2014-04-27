@@ -43,11 +43,13 @@ end
 # Set Java environment for OpenNMS
 execute 'Setup opennms java' do
   command '#{node[:opennms][:home]}/bin/runjava -s'
+  action :run
 end
 
 # Install OpenNMS database schema
 execute 'Initialize OpenNMS database and libraries' do
   command '#{node[:opennms][:home]}/bin/install -dis'
+  action :run
 end
 
 template "#{node[:opennms][:home]}/etc/opennms.properties" do
