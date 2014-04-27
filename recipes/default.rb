@@ -43,13 +43,11 @@ end
 # Set Java environment for OpenNMS
 execute 'Setup opennms java' do
   command '#{node[:opennms][:home]}/bin/runjava -s'
-  action :run
 end
 
 # Install OpenNMS database schema
 execute 'Initialize OpenNMS database and libraries' do
   command '#{node[:opennms][:home]}/bin/install -dis'
-  action :run
 end
 
 template "#{node[:opennms][:home]}/etc/opennms.properties" do
@@ -93,9 +91,8 @@ end
 
 # Install opennms as service and set runlevel
 service 'opennms' do
-  supports :status => true, :restart => true, :reload => true
   if node[:opennms][:jpda]
     start_command 'service opennms -t start'
   end
-  action [ :enable, :start ]
+  action [:enable, :start]
 end

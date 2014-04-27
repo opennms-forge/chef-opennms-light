@@ -12,6 +12,6 @@ depends 'java'
 depends 'postgresql'
 depends 'snmp'
 
-%w{ redhat centos fedora }.each do |os|
+%w(redhat centos fedora).each do |os|
   supports os
 end

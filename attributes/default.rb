@@ -1,7 +1,7 @@
 # Set the OpenNMS release: stable, testing, unstable, snapshot
 default['opennms']['release'] = 'stable'
 
-# Allow Java remote debugging on port 8001: true / false 
+# Allow Java remote debugging on port 8001: true / false
 default['opennms']['jpda'] = 'false'
 default['opennms']['home'] = '/opt/opennms'
 
@@ -40,7 +40,6 @@ default['opennms']['rrd']['tcp']['port'] = ''
 # OpenNMS RRD/JRobin settings
 default['opennms']['storeByGroup'] = 'false'
 default['opennms']['storeByForeignSource'] = 'false'
-
 
 # Start service and Java environment
 default['opennms']['java-heap-space'] = '1024'
@@ -126,4 +125,3 @@ default['opennms']['poller']['threads'] = '30'
 default['opennms']['poller']['unresponsiveEnabled'] = 'false'
 default['opennms']['poller']['nodeOutageStatus'] = 'on'
 default['opennms']['poller']['criticalService'] = 'ICMP'
-

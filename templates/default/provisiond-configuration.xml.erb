@@ -3,7 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.opennms.org/xsd/config/provisiond-configuration"
 
-  foreign-source-dir="<%= node['opennms']['home']opennms_home %>/etc/foreign-sources"
+  foreign-source-dir="<%= node['opennms']['home'] %>/etc/foreign-sources"
   requistion-dir="<%= node['opennms']['home'] %>/etc/imports"
 
   importThreads="<%= node['opennms']['provisiond']['importThreads'] %>" scanThreads="<%= node['opennms']['provisiond']['scanThreads'] %>" rescanThreads="<%= node['opennms']['provisiond']['rescanThreads'] %>" writeThreads="<%= node['opennms']['provisiond']['writeThreads'] %>" >
