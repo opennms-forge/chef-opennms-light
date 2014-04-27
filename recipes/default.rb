@@ -23,6 +23,10 @@ package 'opennms' do
   action :install
 end
 
+package 'jrrd' do
+  action :install
+end
+
 # Install preconfigured configuration files for database connection
 # and OpenNMS
 template "#{node[:opennms][:home]}/etc/opennms-datasources.xml" do
