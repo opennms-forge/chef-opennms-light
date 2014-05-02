@@ -77,3 +77,22 @@ suites:
       opennms:
         release: "stable"
         jpda: "false"
+
+  - name: remote-poller
+    run_list:
+      - recipe[java]
+      - recipe[opennms::remote-poller]
+    attributes:
+      java:
+        install_flavor: "openjdk"
+        jdk_version: "7"
+      snmp:
+        community: "notpublic"
+        syscontact: "ronny@opennms.org"
+        syslocationVirtual: "In the virtual kitchen"
+        full_systemview: "true"
+        disks:
+          - mount: "/"
+            min: "100000"
+      opennms:
+        release: "stable"
