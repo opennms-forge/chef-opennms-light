@@ -27,7 +27,7 @@ DESC="OpenNMS Remote Poller"
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 PIDFILE="/var/run/${NAME}.pid"
 OPENNMS_HOME="<%= node[:opennms][:home] %>"
-JVM_ARGS="-Xmx<%= ['opennms']['java-heap-space'] %>m -Dpoller.logfile=<%= node['opennms']['log'] %>"
+JVM_ARGS="-Xmx<%= node['opennms']['java-heap-space'] %>m -Dpoller.logfile=<%= node['opennms']['log'] %>"
 EXTRA_ARGS=""
 URI="<%= node[:opennms][:baseurl] %>"
 LOCATION="<%= node[:opennms][:location] %>"
