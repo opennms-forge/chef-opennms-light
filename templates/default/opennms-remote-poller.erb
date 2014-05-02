@@ -34,6 +34,8 @@ LOCATION="<%= node[:opennms][:location] %>"
 GUI="<%= node[:opennms][:gui] %>"
 RUNAS="<%= node[:opennms][:runas] %>"
 START_POLLER="<%= node[:opennms][:start_poller] %>"
+REMOTE_USER="<%= node[:opennms][:remote_user] %>"
+REMOTE_PASS="<%= node[:opennms][:remote_pass] %>"
 
 JAVA_CONF="$OPENNMS_HOME/etc/java.conf"
 
@@ -133,7 +135,7 @@ case "$1" in
 
     echo -n "Starting $DESC: "
     if [ -x /sbin/start-stop-daemon ]; then
-      start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --make-pidfile $CHUID --startas $OPENNMS_HOME/bin/remote-poller.sh -- $JVM_ARGS -u "$URI" -l "$LOCATION" $EXTRA_ARGS >/dev/null
+      start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --make-pidfile $CHUID --startas $OPENNMS_HOME/bin/remote-poller.sh -- $JVM_ARGS -u "$URI" -l "$LOCATION" -n "$REMOTE_USER" -p "$REMOTE_PASS" EXTRA_ARGS >/dev/null
     else
       if $SUDO_PREFIX $OPENNMS_HOME/bin/remote-poller.sh $JVM_ARGS -u "$URI" -l "$LOCATION" $EXTRA_ARGS >/dev/null; then
         echo "OK"

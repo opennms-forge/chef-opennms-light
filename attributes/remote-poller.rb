@@ -9,6 +9,8 @@ default['opennms']['location'] = 'Host-Europe'
 default['opennms']['gui'] = 'false'
 default['opennms']['runas'] = 'root'
 default['opennms']['start_poller'] = '1'
+default['opennms']['remote_user'] = 'remote'
+default['opennms']['remote_pass'] = '0p3nNM5-'
 
 # Start service and Java environment
 default['opennms']['java-heap-space'] = '384'
