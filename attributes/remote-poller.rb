@@ -2,10 +2,10 @@
 default['opennms']['release'] = 'stable'
 
 # Allow Java remote debugging on port 8001: true / false
-default['opennms']['home'] = '/opt/opennms'
+default['opennms']['home'] = '/usr/share/opennms'
 default['opennms']['log'] = '/var/log/opennms/opennms-remote-poller.log'
-default['opennms']['baseurl'] = 'http://192.168.0.1:8900/opennms-remoting'
-default['opennms']['location'] = 'Default'
+default['opennms']['baseurl'] = 'https://opennms.opennms-edu.net/opennms-remoting'
+default['opennms']['location'] = 'Host-Europe'
 default['opennms']['gui'] = 'false'
 default['opennms']['runas'] = 'root'
 default['opennms']['start_poller'] = '1'
