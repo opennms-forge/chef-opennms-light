@@ -18,6 +18,12 @@ when 'redhat', 'centos', 'fedora'
     command 'yum -y update'
   end
 when 'debian', 'ubuntu'
+  # add-apt-repository: This is for all Ubuntu >= 14.04
+  package "software-properties-common" do
+    action :install
+  end
+
+  # add-apt-repository: This is for all Ubuntu < 14.04
   package "python-software-properties" do
     action :install
   end
@@ -27,16 +33,33 @@ when 'debian', 'ubuntu'
     action :run
   end
   
-  
   execute "Install OpenNMS apt GPG-key" do
     command "wget -O - http://debian.opennms.org/OPENNMS-GPG-KEY | sudo apt-key add -"
     action :run
+  end
+
+  execute "APT repository update" do
+      command "apt-get update"
+      action :run
   end
 end
 
 package 'opennms-remote-poller' do
   action :install
 end
+
+template "/etc/init.d/opennms-remote-poller" do
+    source "opennms-remote-poller.erb"
+    owner "root"
+    group "root"
+    mode "0755"
+end
+
+execute "Create java.conf" do
+    command "mkdir -p #{node[:opennms][:home]}/etc;; echo $(which java) > #{node[:opennms][:home]}/etc/java.conf"
+    action :run
+end
+
 
 # Install opennms-remote-poller as service and set runlevel
 service 'opennms-remote-poller' do
