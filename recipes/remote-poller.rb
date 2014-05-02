@@ -56,7 +56,7 @@ template "/etc/init.d/opennms-remote-poller" do
 end
 
 execute "Create java.conf" do
-    command "mkdir -p #{node[:opennms][:home]}/etc;; echo $(which java) > #{node[:opennms][:home]}/etc/java.conf"
+    command "mkdir -p #{node[:opennms][:home]}/etc && echo $(which java) > #{node[:opennms][:home]}/etc/java.conf"
     action :run
 end
 
