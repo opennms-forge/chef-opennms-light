@@ -1,3 +1,16 @@
+# Java default settings
+override['java']['install_flavor'] = 'openjdk'
+override['java']['jdk_version'] = '7'
+
+override['postgresql']['version'] = '9.3'
+override['postgresql']['password']['postgres'] = 'opennms_pg'
+
+override['postgresql']['pg_hba'] = [
+  {:type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'ident'},
+  {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
+  {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'md5'}
+]
+
 # Set the OpenNMS release: stable, testing, unstable, snapshot
 default['opennms']['release'] = 'stable'
 
