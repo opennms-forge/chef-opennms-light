@@ -2,7 +2,6 @@
 override['java']['install_flavor'] = 'openjdk'
 override['java']['jdk_version'] = '7'
 
-override['postgresql']['enable_pgdg_yum'] = true
 override['postgresql']['version'] = '9.3'
 override['postgresql']['dir'] = "/var/lib/pgsql/9.3/data"
 override['postgresql']['client']['packages'] = ["postgresql93", "postgresql93-devel"]
