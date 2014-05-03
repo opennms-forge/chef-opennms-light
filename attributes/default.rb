@@ -2,11 +2,18 @@
 override['java']['install_flavor'] = 'openjdk'
 override['java']['jdk_version'] = '7'
 
+override['postgresql']['enable_pgdg_yum'] = true
 override['postgresql']['version'] = '9.3'
+override['postgresql']['dir'] = "/var/lib/pgsql/9.3/data"
+override['postgresql']['client']['packages'] = ["postgresql93", "postgresql93-devel"]
+override['postgresql']['server']['packages'] = ["postgresql93-server"]
+override['postgresql']['server']['service_name'] = "postgresql-9.3"
+override['postgresql']['contrib']['packages'] = ["postgresql93-contrib"]
+
 override['postgresql']['password']['postgres'] = 'opennms_pg'
 
 override['postgresql']['pg_hba'] = [
-  {:type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'ident'},
+  {:type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'peer'},
   {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
   {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'md5'}
 ]
