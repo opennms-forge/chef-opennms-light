@@ -11,7 +11,7 @@ case node[:platform]
 when 'redhat', 'centos', 'fedora'
   execute 'Install OpenNMS yum repository' do
     command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node[:opennms][:release]}-rhel6.noarch.rpm"
-    not_if { ::File.exist?('/etc/yum.repos.d/opennms-#{node[:opennms][:release]}-rhel6.repo') }
+    not_if "yum list installed | grep opennms-repo-#{node[:opennms][:release]}"
   end
 
   execute 'Update yum repostory' do
