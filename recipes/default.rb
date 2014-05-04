@@ -6,16 +6,36 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+include_recipe "java"
+include_recipe "postgresql"
 
-case node[:platform]
-when 'redhat', 'centos', 'fedora'
+case node["platform_family"]
+when 'rhel'
   execute 'Install OpenNMS yum repository' do
     command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node[:opennms][:release]}-rhel6.noarch.rpm"
     not_if "yum list installed | grep opennms-repo-#{node[:opennms][:release]}"
   end
-
   execute 'Update yum repostory' do
     command 'yum -y update'
+  end
+when 'debian'
+  template "/etc/apt/sources.list.d/opennms.list" do
+    source "opennms.list.erb"
+    owner "root"
+    group "root"
+    mode "0644"
+  end
+  bash "Install OpenNMS key" do
+    user "root"
+    cwd "/root"
+    code <<-EOH
+      wget -O - http://debian.opennms.org/OPENNMS-GPG-KEY | sudo apt-key add -
+    EOH
+    not_if "apt-key list | grep OpenNMS"
+  end
+  execute "Update apt repository" do
+    command "aptitude update"
+    action :run
   end
 end
 
@@ -97,8 +117,6 @@ end
 
 # Install opennms as service and set runlevel
 service 'opennms' do
-  if node[:opennms][:jpda]
-    start_command 'service opennms -t start'
-  end
   action [:enable, :start]
 end
+

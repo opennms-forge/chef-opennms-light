@@ -20,7 +20,12 @@ platforms:
       box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/CentOS-6-x86_64-minimal.box
     attributes:
       postgresql:
-        enable_pgdg_yum: "true"
+        enable_pgdg_yum: true
+      server:
+        packages: ["postgresql93-server"]
+        service_name: "postgresql-9.3"
+      client:
+        packages: ["postgresql93"]
       opennms:
         home: "/opt/opennms"
   - name: Ubuntu-1404-x86_64-server
@@ -30,24 +35,21 @@ platforms:
     attributes:
       postgresql:
         enable_pgdg_apt: "true"
+        client:
+          packages: ["postgresql-client-9.3"]
+        server:
+          packages: ["postgresql-9.3"]
+        contrib: 
+          packages: ["postgresql-contrib-9.3"]
       opennms:
         home: "/usr/share/opennms"
 suites:
   - name: default
     run_list:
       - recipe[java]
-      - recipe[postgresql::server] 
-      - recipe[snmp]
+      - recipe[postgresql::server]
       - recipe[opennms::default]
     attributes:
-      snmp:
-        community: "notpublic"
-        syscontact: "ronny@opennms.org"
-        syslocationVirtual: "In the virtual kitchen"
-        full_systemview: "true"
-        disks:
-          - mount: "/"
-            min: "100000"
       opennms:
         release: "stable"
         jpda: "false"
@@ -60,14 +62,6 @@ suites:
       java:
         install_flavor: "openjdk"
         jdk_version: "7"
-      snmp:
-        community: "notpublic"
-        syscontact: "ronny@opennms.org"
-        syslocationVirtual: "In the virtual kitchen"
-        full_systemview: "true"
-        disks:
-          - mount: "/"
-            min: "100000"
       opennms:
         release: "stable"
         home: "/usr/share/opennms"
