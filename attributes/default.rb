@@ -52,7 +52,7 @@ default['opennms']['storeByGroup'] = 'false'
 default['opennms']['storeByForeignSource'] = 'false'
 
 # Start service and Java environment
-default['opennms']['java-heap-space'] = '1024'
+default['opennms']['java_heap_space'] = '1024'
 default['opennms']['start-timeout'] = '0'
 
 # Jetty options
