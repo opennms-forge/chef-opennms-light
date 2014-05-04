@@ -2,10 +2,7 @@
 override['java']['install_flavor'] = 'openjdk'
 override['java']['jdk_version'] = '7'
 
-override['postgresql']['version'] = '9.3'
 override['postgresql']['password']['postgres'] = 'opennms_pg'
-override['postgresql']['dir'] = "/etc/postgresql/#{node['postgresql']['version']}/main"
-override['postgresql']['config']['data_directory'] = "/var/lib/postgresql/#{node['postgresql']['version']}/main"
 override['postgresql']['pg_hba'] = [
   {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
   {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'md5'}
@@ -13,10 +10,10 @@ override['postgresql']['pg_hba'] = [
 
 # Set the OpenNMS release: stable, testing, unstable, snapshot
 default['opennms']['release'] = 'stable'
+default['opennms']['home'] = '/opt/opennms'
 
 # Allow Java remote debugging on port 8001: true / false
 default['opennms']['jpda'] = 'false'
-default['opennms']['home'] = '/opt/opennms'
 
 # Postgres admin settings
 default['opennms']['postgres']['admin'] = 'postgres'

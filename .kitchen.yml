@@ -21,13 +21,8 @@ platforms:
     attributes:
       postgresql:
         enable_pgdg_yum: true
-      server:
-        packages: ["postgresql93-server"]
-        service_name: "postgresql-9.3"
-      client:
-        packages: ["postgresql93"]
       opennms:
-        home: "/opt/opennms"
+        home: /opt/opennms
   - name: Ubuntu-1404-x86_64-server
     driver_config:
       box: Ubuntu-1404-x86_64-server
@@ -35,14 +30,8 @@ platforms:
     attributes:
       postgresql:
         enable_pgdg_apt: "true"
-        client:
-          packages: ["postgresql-client-9.3"]
-        server:
-          packages: ["postgresql-9.3"]
-        contrib: 
-          packages: ["postgresql-contrib-9.3"]
       opennms:
-        home: "/usr/share/opennms"
+        home: /usr/share/opennms
 suites:
   - name: default
     run_list:
