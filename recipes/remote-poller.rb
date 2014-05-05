@@ -7,10 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
-case node[:platform]
+case node['platform']
 when 'redhat', 'centos', 'fedora'
   execute 'Install OpenNMS yum repository' do
-    command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node[:opennms][:release]}-rhel6.noarch.rpm"
+    command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
     not_if { ::File.exist?('/etc/yum.repos.d/opennms-#{node[:opennms][:release]}-rhel6.repo') }
   end
 
@@ -29,12 +29,16 @@ when 'debian', 'ubuntu'
   end
 
   execute "Install OpenNMS apt repository" do
-    command "add-apt-repository 'deb http://debian.opennms.org #{node[:opennms][:release]} main'"
+    command "add-apt-repository 'deb http://debian.opennms.org #{node['opennms']['release']} main'"
     action :run
   end
   
-  execute "Install OpenNMS apt GPG-key" do
-    command "wget -O - http://debian.opennms.org/OPENNMS-GPG-KEY | sudo apt-key add -"
+  remote_file "#{Chef::Config[:file_cache_path]}/OPENNMS-GPG-KEY" do
+    source "http://debian.opennms.org/OPENNMS-GPG-KEY"
+  end
+  
+  execute 'Install OpenNMS apt GPG-key' do
+    command "sudo apt-key add #{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY"
     action :run
   end
 
@@ -56,7 +60,7 @@ template "/etc/init.d/opennms-remote-poller" do
 end
 
 execute "Create java.conf" do
-    command "mkdir -p #{node[:opennms][:home]}/etc && echo $(which java) > #{node[:opennms][:home]}/etc/java.conf"
+    command "mkdir -p #{node['opennms']['home']}/etc && echo $(which java) > #{node['opennms']['home']}/etc/java.conf"
     action :run
 end
 
