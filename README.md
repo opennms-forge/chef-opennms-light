@@ -265,13 +265,15 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
   <tr>
     <td><tt>['opennms']['storeByGroup']</tt></td>
     <td>Boolean</td>
-    <td></td>
+    <td>On very large systems the OpenNMS default mechanism of storing one data source per RRD file can be very I/O Intensive.  Many I/O subsystems fail to keep up with the vast amounts of data that OpenNMS can collect in this situation.  We have found that in those situations having fewer large files with multiple data sources in each performs better than many smaller files, each with a single data source. This option enables all of the data sources belonging to a single collection group to be stored together in a single file. To enable this setting uncomment the below line and change it to 'true'.
+    </td>
     <td><tt>false</tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['storeByForeignSource']</tt></td>
     <td>Boolean</td>
-    <td></td>
+    <td>By default, data collected for a node with nodeId n is stored in the directory `${rrd.base.dir}/snmp/n` . If the node is deleted and re-added, it will receive a new `nodeId`, and subsequent data will be stored in a new directory. This can create problems in data continuity if a large number of nodes get deleted and re-added either accidentally or intentionally. This option enables an alternate storage location for nodes that are provisioned (i.e. they have a `foreignSource` and `foreignId` defined) If `storeByForeignSource` is set to `true`, a provisioned node will have its data stored by `foreignSource/ForeignId` rather than `nodeId`. For example, a node with `foreignSource/foreignId` "mysource/12345" will have its data stored in `${rrd.base.dir}/snmp/fs/mysource/12345`. With this option enabled, data collection will continue to use the same storage location as long as the `foreignSource/foreignId` is not redefined, regardless of how many times the node may be deleted and re-added.
+    </td>
     <td><tt>false</tt></td>
   </tr>
 </table>
@@ -530,13 +532,14 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
   <tr>
     <td><tt>['opennms']['snmp']['strategyClass']</tt></td>
     <td>String</td>
-    <td></td>
+    <td>OpenNMS provides two different SNMP implementations. JoeSNMP is the original OpenNMS SNMP Library and provides SNMP v1 and v2 support. SNMP4J is a new 100% Java SNMP library that provides support for SNMP v1, v2 and v3. To enable the JoeSnmp library set the strategy class to `org.opennms.snmp.strategyClass=org.opennms.netmgt.snmp.joesnmp.JoeSnmpStrategy`.</td>
     <td><tt>org.opennms.netmgt.snmp.snmp4j.Snmp4JStrategy</tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['snmp4j']['forwardRuntimeExceptions']</tt></td>
     <td>Boolean</td>
-    <td></td>
+    <td>When debugging SNMP problems when using the SNMP4J library, it may be helpful to receive runtime exceptions from SNMP4J. These exceptions almost always indicate a problem with an SNMP agent. Any that we don't catch will end up in output.log, so they're disabled by default, but they may provide more information (albeit without timestamps) than the messages that SNMP4J logs (see snmp4j.LogFactory)
+    </td>
     <td><tt>false</tt></td>
   </tr>
   <tr>
