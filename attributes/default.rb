@@ -128,10 +128,3 @@ default['opennms']['excludeServiceMonitorsFromRemotePoller'] = 'DHCP,NSClient,Ra
 
 # Data collection settings
 default['opennms']['datacollection']['reloadCheckInterval'] = '30000'
-default['opennms']['collectd']['threads'] = '50'
-
-# Pollerd settings
-default['opennms']['poller']['threads'] = '30'
-default['opennms']['poller']['unresponsiveEnabled'] = 'false'
-default['opennms']['poller']['nodeOutageStatus'] = 'on'
-default['opennms']['poller']['criticalService'] = 'ICMP'

@@ -10,6 +10,7 @@ include_recipe "java"
 include_recipe "postgresql"
 
 case node['platform_family']
+# Install yum repository on Red Hat family linux
 when "rhel"
   execute "Install OpenNMS yum repository" do
     command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
@@ -18,6 +19,7 @@ when "rhel"
   execute "Update yum repostory" do
     command "yum -y update"
   end
+# Install aptitude repository on Debian family
 when "debian"
   template "/etc/apt/sources.list.d/opennms.list" do
     source "opennms.list.erb"
@@ -59,8 +61,6 @@ end
   "opennms.properties" => "opennms.properties.erb",
   "rrd-configuration.properties" => "rrd-configuration.properties.erb",
   "opennms-datasources.xml" => "opennms-datasources.xml.erb",
-  "poller-configuration.xml" => "poller-configuration.xml.erb",
-  "collectd-configuration.xml" => "collectd-configuration.xml.erb",
   "provisiond-configuration.xml" => "provisiond-configuration.xml.erb"
 }.each do |dest, source|
   template "#{node['opennms']['home']}/etc/#{dest}" do
