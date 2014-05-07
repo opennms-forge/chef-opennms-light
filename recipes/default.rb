@@ -54,7 +54,7 @@ end
 
 # Set Java environment for OpenNMS
 execute "Setup opennms java" do
-  command "#{node['opennms'][home_dir]}/bin/runjava -s"
+  command "#{home_dir}/bin/runjava -s"
   action :run
 end
 
@@ -65,7 +65,7 @@ end
   "opennms-datasources.xml" => "opennms-datasources.xml.erb",
   "provisiond-configuration.xml" => "provisiond-configuration.xml.erb"
 }.each do |dest, source|
-  template "#{node['opennms'][home_dir]}/etc/#{dest}" do
+  template "#{home_dir}/etc/#{dest}" do
     source "#{source}"
     owner "root"
     group "root"
@@ -75,7 +75,7 @@ end
 
 # Install OpenNMS database schema
 execute "Initialize OpenNMS database and libraries" do
-  command "#{node['opennms'][home_dir]}/bin/install -dis"
+  command "#{home_dir}/bin/install -dis"
   action :run
 end
 
