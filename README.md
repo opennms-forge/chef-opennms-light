@@ -416,9 +416,10 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
     <td></td>
   </tr>
   <tr>
-    <td><tt>['opennms']['geocoder'][''class]</tt></td>
+    <td><tt>['opennms']['geocoder']['class']</tt></td>
     <td>String</td>
-<td><tt>org.opennms.features.poller.remote.gwt.server.geocoding.NullGeocoder</tt></td>
+    <td></td>
+    <td><tt>org.opennms.features.poller.remote.gwt.server.geocoding.NullGeocoder</tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['geocoder']['rate']</tt></td>
