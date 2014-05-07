@@ -10,10 +10,11 @@ override['postgresql']['pg_hba'] = [
 
 # Set the OpenNMS release: stable, testing, unstable, snapshot
 default['opennms']['release'] = 'stable'
-default['opennms']['home'] = '/opt/opennms'
 
-# Allow Java remote debugging on port 8001: true / false
-default['opennms']['jpda'] = 'false'
+# TODO: Allow Java remote debugging on port 8001: true / false
+# I don't know how to configure the "service" correctly to restart opennms with -t and having 
+# an idempotent cookbook. 
+# default['opennms']['jpda'] = 'false'
 
 # Postgres admin settings
 default['opennms']['postgres']['admin'] = 'postgres'
@@ -26,7 +27,7 @@ default['opennms']['dbuser'] = 'opennms'
 default['opennms']['dbpass'] = 'opennms'
 
 # Configure RRD technology: jrobin / rrdtool
-default['opennms']['library']['jrrd'] = '/usr/lib/libjrrd.so'
+default['opennms']['library']['jrrd'] = '/usr/lib64/libjrrd.so'
 default['opennms']['rrd']['strategyClass'] = 'org.opennms.netmgt.rrd.jrobin.JRobinRrdStrategy'
 default['opennms']['rrd']['interfaceJar'] = '/usr/share/java/jrrd.jar'
 
@@ -53,7 +54,7 @@ default['opennms']['storeByForeignSource'] = 'false'
 
 # Start service and Java environment
 default['opennms']['java_heap_space'] = '1024'
-default['opennms']['start-timeout'] = '0'
+default['opennms']['start_timeout'] = '0'
 
 # Jetty options
 default['opennms']['jetty']['port'] = '8980'

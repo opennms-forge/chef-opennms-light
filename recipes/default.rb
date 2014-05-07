@@ -12,6 +12,7 @@ include_recipe "postgresql"
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
+  home_dir = "/opt/opennms"
   execute "Install OpenNMS yum repository" do
     command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
     not_if "yum list installed | grep opennms-repo-#{node['opennms']['release']}"
@@ -21,6 +22,7 @@ when "rhel"
   end
 # Install aptitude repository on Debian family
 when "debian"
+  home_dir = "/usr/share/opennms"
   template "/etc/apt/sources.list.d/opennms.list" do
     source "opennms.list.erb"
     owner "root"
@@ -52,7 +54,7 @@ end
 
 # Set Java environment for OpenNMS
 execute "Setup opennms java" do
-  command "#{node['opennms']['home']}/bin/runjava -s"
+  command "#{node['opennms'][home_dir]}/bin/runjava -s"
   action :run
 end
 
@@ -63,7 +65,7 @@ end
   "opennms-datasources.xml" => "opennms-datasources.xml.erb",
   "provisiond-configuration.xml" => "provisiond-configuration.xml.erb"
 }.each do |dest, source|
-  template "#{node['opennms']['home']}/etc/#{dest}" do
+  template "#{node['opennms'][home_dir]}/etc/#{dest}" do
     source "#{source}"
     owner "root"
     group "root"
@@ -73,7 +75,7 @@ end
 
 # Install OpenNMS database schema
 execute "Initialize OpenNMS database and libraries" do
-  command "#{node['opennms']['home']}/bin/install -dis"
+  command "#{node['opennms'][home_dir]}/bin/install -dis"
   action :run
 end
 

@@ -14,5 +14,5 @@ default['opennms']['remote_pass'] = 'remote-pass'
 
 # Start service and Java environment
 default['opennms']['java_heap_space'] = '384'
-default['opennms']['start-timeout'] = '0'
+default['opennms']['start_timeout'] = '0'
 
