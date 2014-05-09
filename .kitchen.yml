@@ -14,24 +14,21 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: CentOS-6-x86_64-minimal
-    driver_config:
-      box: CentOS-6-x86_64-minimal
-      box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/CentOS-6-x86_64-minimal.box
+  - name: ubuntu-14.04
     attributes:
-      postgresql:
-        enable_pgdg_yum: true
-      opennms:
-        home: /opt/opennms
-  - name: Ubuntu-1404-x86_64-server
-    driver_config:
-      box: Ubuntu-1404-x86_64-server
-      box_url: http://mirror.informatik.hs-fulda.de/pub/vagrant/Ubuntu-1404-x86_64-server.box
-    attributes:
-      postgresql:
-        enable_pgdg_apt: "true"
       opennms:
         home: /usr/share/opennms
+
+  - name: ubuntu-12.04
+    attributes:
+      opennms:
+        home: /usr/share/opennms
+
+  - name: centos-6.5
+    attributes:
+      opennms:
+        home: /opt/opennms
+
 suites:
   - name: default
     run_list:
@@ -40,8 +37,7 @@ suites:
       - recipe[opennms::default]
     attributes:
       opennms:
-        release: "stable"
-        jpda: "false"
+        release: stable
 
   - name: remote-poller
     run_list:
@@ -49,10 +45,10 @@ suites:
       - recipe[opennms::remote-poller]
     attributes:
       java:
-        install_flavor: "openjdk"
-        jdk_version: "7"
+        install_flavor: openjdk
+        jdk_version: 7
       opennms:
-        release: "stable"
-        home: "/usr/share/opennms"
-        location: "Host-Europe"
-        baseurl: "https://opennms.opennms-edu.net/opennms-remoting"
+        release: stable
+        home: /usr/share/opennms
+        location: Host-Europe
+        baseurl: https://opennms.opennms-edu.net/opennms-remoting
