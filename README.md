@@ -538,7 +538,7 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
   </tr>
 </table>
 
-#### Configure OpenNMS SNMP  implementation: opennms::default
+#### Configure SNMP implementation and Collectd: opennms::default
 
 <table>
   <tr>
@@ -571,6 +571,12 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
     <td>Boolean</td>
     <td>For systems with very large numbers of interfaces we may be unable to collect all the data by scanning the entire table in the specified time interval. If only a few instances are being collected then we can limit the collection to only those instances and save collection time but possible *getting* confused by instance changes. Set this to <tt>true</tt> to enable instance limiting.</td>
     <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['opennms']['datacollection']['reloadCheckInterval']</tt></td>
+    <td>Integer</td>
+    <td>Specifies the amount of time to wait (expressed in milliseconds) until the reload container physically checks if the datacollection-config.xml file has been changed.</td>
+    <td><tt>30000</tt></td>
   </tr>
 </table>
 
@@ -645,37 +651,14 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
   <tr>
     <td><tt>['opennms']['minimumConfigurationReloadInterval']</tt></td>
     <td>Integer</td>
-    <td></td>
+    <td>This setting is the minimum amount of time between reloads of a remote poller configuration in milliseconds because of global changes. This value should never be set less the 300000 (5 minutes) except to set it to zero which means never only reload the configuration if the location monitors status has been set to CONFIG_CHANGED.</td>
     <td><tt> 300000 </tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['excludeServiceMonitorsFromRemotePoller']</tt></td>
     <td>String</td>
-    <td></td>
+    <td>This setting enables OpenNMS to exclude all references to certain services from the poller configuration that it sends to the remote location monitors. This is necessary when monitor classes are in use that are not included in the remote poller builds. Without this setting, the remote poller will crash on startup (see issue NMS-5777) even if none of the problematic services appears in any package. If you create custom services, you may need to add them to this list.</td>
     <td><tt>DHCP,NSClient,RadiusAuth,XMP</tt></td>
-  </tr>
-</table>
-
-#### Configure remote poller and Collectd settings: opennms::default
-
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['opennms']['minimumConfigurationReloadInterval']</tt></td>
-    <td>Integer</td>
-    <td> This setting is the minimum amount of time between reloads of a remote poller configuration in milliseconds because of global changes. This value should never be set less the 300000 (5 minutes) except to set it to zero which means never only reload the configuration if the location monitors status has been set to CONFIG_CHANGED.</td>
-    <td><tt>300000</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['opennms']['datacollection']['reloadCheckInterval']</tt></td>
-    <td>Integer</td>
-    <td>Specifies the amount of time to wait (expressed in milliseconds) until the reload container physically checks if the datacollection-config.xml file has been changed.</td>
-    <td><tt>30000</tt></td>
   </tr>
 </table>
 
