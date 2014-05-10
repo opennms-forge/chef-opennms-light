@@ -33,5 +33,5 @@
   "recipes": {
     "opennms": "Installs open source enterprise network management platform OpenNMS"
   },
-  "version": "0.2.3"
+  "version": "0.2.4"
 }
