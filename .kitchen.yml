@@ -50,5 +50,5 @@ suites:
       opennms:
         release: stable
         home: /usr/share/opennms
-        location: Host-Europe
-        baseurl: https://opennms.opennms-edu.net/opennms-remoting
+        location: Germany
+        baseurl: http://192.168.0.1:8980/opennms-remoting
