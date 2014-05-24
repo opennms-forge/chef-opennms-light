@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe "java"
-include_recipe "postgresql"
+include_recipe "postgresql::server"
 
 case node['platform_family']
 # Install yum repository on Red Hat family linux
