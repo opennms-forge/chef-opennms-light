@@ -1,7 +1,7 @@
 opennms Cookbook
 ================
-[![Build Status](https://travis-ci.org/indigo423/chef-opennms.svg)](https://travis-ci.org/indigo423/chef-opennms)
-[travis]: https://travis-ci.org/indigo423/chef-opennms
+[![Build Status](https://travis-ci.org/indigo423/chef-opennms-light.svg)](https://travis-ci.org/indigo423/chef-opennms-light)
+[travis]: https://travis-ci.org/indigo423/chef-opennms-light
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=indigo423&url=https://github.com/indigo423/chef-opennms-light&title=chef-opennms-light&language=&tags=github&category=software)
 
 This cookbook allows to configure  an install the enterprise network management platform OpenNMS. The cookbook supports Linux distribution from Red Hat and Debian family.
