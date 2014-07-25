@@ -29,6 +29,11 @@ platforms:
       opennms:
         home: /opt/opennms
 
+  - name: centos-7.0
+    attributes:
+      opennms:
+        home: /opt/opennms
+
 suites:
   - name: default
     run_list:
@@ -52,3 +57,4 @@ suites:
         home: /usr/share/opennms
         location: Germany
         baseurl: http://192.168.0.1:8980/opennms-remoting
+
