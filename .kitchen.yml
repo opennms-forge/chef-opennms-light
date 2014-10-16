@@ -34,15 +34,15 @@ suites:
     run_list:
       - recipe[java]
       - recipe[postgresql::server]
-      - recipe[opennms::default]
+      - recipe[opennms-light::default]
     attributes:
       opennms:
-        release: stable
+        release: snapshot
 
   - name: remote-poller
     run_list:
       - recipe[java]
-      - recipe[opennms::remote-poller]
+      - recipe[opennms-light::remote-poller]
     attributes:
       java:
         install_flavor: openjdk

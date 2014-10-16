@@ -10,10 +10,12 @@ override['postgresql']['pg_hba'] = [
 
 # Set the OpenNMS release: stable, testing, unstable, snapshot
 default['opennms']['release'] = 'stable'
+default['opennms']['repository']['yum'] = 'yum.opennms.org'
+default['opennms']['repository']['apt'] = 'debian.opennms.org'
 
 # TODO: Allow Java remote debugging on port 8001: true / false
-# I don't know how to configure the "service" correctly to restart opennms with -t and having 
-# an idempotent cookbook. 
+# I don't know how to configure the "service" correctly to restart opennms with -t and having
+# an idempotent cookbook.
 # default['opennms']['jpda'] = 'false'
 
 # Postgres admin settings

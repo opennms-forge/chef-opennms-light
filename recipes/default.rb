@@ -4,8 +4,9 @@
 #
 # Copyright 2014, The OpenNMS Group, Inc.
 #
-# All rights reserved - Do Not Redistribute
+# License GPLv3
 #
+
 include_recipe "java"
 include_recipe "postgresql::server"
 
@@ -14,7 +15,7 @@ case node['platform_family']
 when "rhel"
   home_dir = "/opt/opennms"
   execute "Install OpenNMS yum repository" do
-    command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
+    command "rpm -Uvh http://#{node['opennms']['repository']['yum']}/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
     not_if "yum list installed | grep opennms-repo-#{node['opennms']['release']}"
   end
   execute "Update yum repostory" do
@@ -31,9 +32,9 @@ when "debian"
   end
 
   remote_file "#{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY" do
-    source "http://debian.opennms.org/OPENNMS-GPG-KEY"
+    source "http://#{node['opennms']['repository']['apt']}/OPENNMS-GPG-KEY"
   end
-  
+
   execute "Install OpenNMS apt GPG-key" do
     command "sudo apt-key add #{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY"
     action :run
@@ -83,4 +84,3 @@ end
 service "opennms" do
   action [:enable, :start]
 end
-
