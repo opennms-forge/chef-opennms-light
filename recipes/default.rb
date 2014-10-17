@@ -14,10 +14,17 @@ case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
   home_dir = "/opt/opennms"
-  execute "Install OpenNMS yum repository" do
-    command "rpm -Uvh http://#{node['opennms']['repository']['yum']}/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
-    not_if "yum list installed | grep opennms-repo-#{node['opennms']['release']}"
+  template "/etc/yum.repos.d/opennms-rhel6.repo" do
+    source "opennms.yum.repo.erb"
+    owner "root"
+    group "root"
+    mode "0644"
   end
+
+  remote_file "/etc/yum.repos.d/OPENNMS-GPG-KEY" do
+    source "http://#{node['opennms']['repository']['yum']}/OPENNMS-GPG-KEY"
+  end
+
   execute "Update yum repostory" do
     command "yum -y update"
   end

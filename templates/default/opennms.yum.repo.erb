@@ -1,0 +1,13 @@
+[opennms-<%= node[:opennms][:release] %>-common]
+name=RPMs Common to All OpenNMS Architectures (<%= node[:opennms][:release] %>)
+baseurl=http://<%= node[:opennms][:repository][:yum] %>/<%= node[:opennms][:release] %>/common
+failovermethod=roundrobin
+gpgcheck=1
+gpgkey=file:///etc/yum.repos.d/OPENNMS-GPG-KEY
+
+[opennms-<%= node[:opennms][:release] %>-rhel6]
+name=RedHat Enterprise Linux 6.x and CentOS 6.x (<%= node[:opennms][:release] %>)
+baseurl=http://<%= node[:opennms][:repository][:yum] %>/<%= node[:opennms][:release] %>/rhel6
+failovermethod=roundrobin
+gpgcheck=1
+gpgkey=file:///etc/yum.repos.d/OPENNMS-GPG-KEY
