@@ -4,7 +4,7 @@
 #
 # Copyright 2014, The OpenNMS Group, Inc.
 #
-# All rights reserved - Do Not Redistribute
+# License GPLv3
 #
 
 case node['platform']
@@ -32,11 +32,11 @@ when 'debian', 'ubuntu'
     command "add-apt-repository 'deb http://debian.opennms.org #{node['opennms']['release']} main'"
     action :run
   end
-  
+
   remote_file "#{Chef::Config[:file_cache_path]}/OPENNMS-GPG-KEY" do
     source "http://debian.opennms.org/OPENNMS-GPG-KEY"
   end
-  
+
   execute 'Install OpenNMS apt GPG-key' do
     command "sudo apt-key add #{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY"
     action :run
