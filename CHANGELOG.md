@@ -20,6 +20,11 @@ This file is used to list changes made in each version of the opennms cookbook.
 - [Ronny Trommer] - Changed receipe dependency from postgresql to postgresql::server
 - [Ronny Trommer] - Renamed to opennms-light, aiming for minimal config and working with stable,testing and unstable
 
+1.0.0
+-----
+- [Ronny Trommer] - Added support for changin install mirror for APT and YUM as parameter
+- [Ronny Trommer] - Introducing version tag
+
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.

@@ -6,7 +6,7 @@ opennms Cookbook
 
 This cookbook allows to configure  an install the enterprise network management platform OpenNMS. The cookbook supports Linux distribution from Red Hat and Debian family.
 
-The cookbook can be tested using `kitchen` and `Vagrant` is preconfigured with a minimal Ubuntu Server 14.04 LTS and Centos 6.5 image. See:
+The cookbook can be tested using `kitchen` and `Vagrant` is preconfigured with a minimal Ubuntu Server 14.04 LTS and Centos 7.0 image. See:
 - `kitchen list`
 - `kitchen converge [INSTANCE|REGEXP|all]`
 
@@ -19,7 +19,7 @@ Requirements
 Hints:
 ------------
 - If run on Ubuntu >= 14.04 LTS please set postgres version manually to '9.3'.
-- CentOS 6.5 installs the default PostgreSQL server 8.4.
+- CentOS 7.0 installs the default PostgreSQL server 9.2
 
 Dependencies
 ------------
@@ -103,6 +103,18 @@ The default configuration installs latest OpenNMS stable from official OpenNMS r
     <td>String</td>
     <td>Which version of OpenNMS should be installed: <tt>stable</tt>, <tt>testing</tt>,<tt>unstable</tt>,<tt>snapshot</tt></td>
     <td><tt>stable</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['opennms']['repository']['yum']</tt></td>
+    <td>String</td>
+    <td>OpenNMS YUM repository server `yum.opennms.org` or `yum.opennms.eu`.</td>
+    <td><tt>yum.opennms.org</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['opennms']['repository']['apt']</tt></td>
+    <td>String</td>
+    <td>OpenNMS APT repository server `debian.opennms.org` or `debian.opennms.eu`.</td>
+    <td><tt>debian.opennms.org</tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['postgres']['admin']</tt></td>
@@ -251,7 +263,7 @@ In OpenNMS you can choose between two RRD technologies `JRobin` and `RRDtool`. T
   <tr>
     <td><tt>['opennms']['jrobin']['rrdBackendFactory']</tt></td>
     <td>String</td>
-    <td>The following property sets the default JRobin backend Factory. Acceptable values are: 
+    <td>The following property sets the default JRobin backend Factory. Acceptable values are:
     - <tt>FILE</tt>: Standard RRD algorithm, cache when possible and no locking
     - <tt>SAFE</tt>: Aggressive locking and low levels of caching. Untested
     - <tt>NIO</tt>: MMAPped RRDs, using NIO

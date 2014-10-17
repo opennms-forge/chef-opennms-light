@@ -7,10 +7,7 @@
   "license": "GPLv3+",
   "platforms": {
     "ubuntu": ">= 0.0.0",
-    "debian": ">= 0.0.0",
-    "redhat": ">= 0.0.0",
     "centos": ">= 0.0.0",
-    "fedora": ">= 0.0.0"
   },
   "dependencies": {
     "java": ">= 0.0.0",
@@ -33,5 +30,5 @@
   "recipes": {
     "opennms": "Installs open source enterprise network management platform OpenNMS"
   },
-  "version": "0.2.5"
+  "version": "1.0.0"
 }
