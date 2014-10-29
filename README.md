@@ -694,31 +694,30 @@ RRD files are stored by the foreign source from OpenNMS Provisiond.
 
 ```json
 {
-  config.vm.provision :chef_solo do |chef|
-    chef.json = {
-      :postgresql => {
-        :password => {
-          :postgres => "opennms_pg"
-        }
-      },
-      :opennms => {
-        :release => "bleeding", #stable, testing, unstable, snapshot, bleeding
-        :jpda => false,
-        :java_heap_space => "1024",
-        :repository => {
-          :yum => "yum.opennms.eu",
-          :apt => "debian.opennms.eu"
-        },
-        :library => {
-          :jrrd => "/usr/lib/jni/libjrrd.so"
-        },
-        :rrd => {
-          :strategyClass => "org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy",
-          :interfaceJar => "/usr/share/java/jrrd.jar"
-        },
-        :storeByForeignSource => "true"
+  chef.json = {
+    :postgresql => {
+      :password => {
+        :postgres => "opennms_pg"
       }
+    },
+    :opennms => {
+      :release => "bleeding", #stable, testing, unstable, snapshot, bleeding
+      :jpda => false,
+      :java_heap_space => "1024",
+      :repository => {
+        :yum => "yum.opennms.eu",
+        :apt => "debian.opennms.eu"
+      },
+      :library => {
+        :jrrd => "/usr/lib/jni/libjrrd.so"
+      },
+      :rrd => {
+        :strategyClass => "org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy",
+        :interfaceJar => "/usr/share/java/jrrd.jar"
+      },
+      :storeByForeignSource => "true"
     }
+  }
 }
 ```
 
