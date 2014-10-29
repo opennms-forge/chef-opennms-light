@@ -54,7 +54,9 @@ when "debian"
 end
 
 # Install OpenNMS and Java RRDtool library
-["opennms", "jrrd"].each do |package_name|
+["opennms",
+ "jrrd",
+ "rrdtool"].each do |package_name|
   package "#{package_name}" do
     action :install
   end
