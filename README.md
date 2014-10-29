@@ -693,6 +693,7 @@ This configuration configures OpenNMS on Ubuntu to use RRDtool instead of JRobin
 RRD files are stored by the foreign source from OpenNMS Provisiond.
 
 ```json
+{
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :postgresql => {
@@ -718,6 +719,7 @@ RRD files are stored by the foreign source from OpenNMS Provisiond.
         :storeByForeignSource => "true"
       }
     }
+}
 ```
 
 #### opennms::remote-poller
