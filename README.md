@@ -692,7 +692,7 @@ Example
 This configuration configures OpenNMS on Ubuntu to use RRDtool instead of JRobin.
 RRD files are stored by the foreign source from OpenNMS Provisiond.
 
-```json
+```yaml
 {
   chef.json = {
     :postgresql => {
