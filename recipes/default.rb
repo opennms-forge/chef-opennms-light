@@ -7,9 +7,6 @@
 # License GPLv3
 #
 
-include_recipe "java"
-include_recipe "postgresql::server"
-
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
@@ -53,7 +50,11 @@ when "debian"
   end
 end
 
-# Install OpenNMS and Java RRDtool library
+# Install basic dependencies
+include_recipe "java"
+include_recipe "postgresql::server"
+
+# Install OpenNMS and Java-RRDtool library
 ["opennms",
  "jrrd",
  "rrdtool"].each do |package_name|
