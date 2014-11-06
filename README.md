@@ -4,7 +4,10 @@ opennms Cookbook
 [travis]: https://travis-ci.org/indigo423/chef-opennms-light
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=indigo423&url=https://github.com/indigo423/chef-opennms-light&title=chef-opennms-light&language=&tags=github&category=software)
 
-This cookbook allows to configure  an install the enterprise network management platform OpenNMS. The cookbook supports Linux distribution from Red Hat and Debian family.
+This cookbook allows to configure an install the enterprise network management platform OpenNMS.
+The cookbook supports Linux distribution from Red Hat and Debian family.
+This cookbook is just a light variant with a few basic OpenNMS system settings.
+If you are interested in a more full fledged cookbook, please use the https://supermarket.getchef.com/cookbooks/opennms cookbook provided by David Schlenk.
 
 The cookbook can be tested using `kitchen` and `Vagrant` is preconfigured with a minimal Ubuntu Server 14.04 LTS and Centos 7.0 image. See:
 - `kitchen list`
@@ -747,3 +750,7 @@ License and Authors
 -------------------
 Authors:
 - Author: Ronny Trommer ronny@opennms.org
+
+Credits
+-------
+Thanks to David Schlenk for creating a full fledged OpenNMS cookbook.
