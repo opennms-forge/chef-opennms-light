@@ -19,8 +19,8 @@
 # use an extension other than ".so" on JNI shared objects; Mac OS X notably
 # uses ".jnilib":
 #org.opennms.rrd.strategyClass=org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy
-org.opennms.rrd.interfaceJar=/usr/share/java/jrrd.jar
-opennms.library.jrrd=/usr/lib/libjrrd.so
+org.opennms.rrd.interfaceJar=<%= node['opennms']['rrd']['interfaceJar'] %>
+opennms.library.jrrd=<%= node['opennms']['library']['jrrd'] %>
 #
 # The default setting is org.opennms.netmgt.rrd.jrobin.JRobinRrdStrategy
 org.opennms.rrd.strategyClass=<%= node['opennms']['rrd']['strategyClass'] %>
