@@ -27,6 +27,8 @@ when "rhel"
   end
 # Install aptitude repository on Debian family
 when "debian"
+  include_recipe 'ubuntu'
+
   home_dir = "/usr/share/opennms"
   template "/etc/apt/sources.list.d/opennms.list" do
     source "opennms.list.erb"

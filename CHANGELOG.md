@@ -20,11 +20,14 @@ This file is used to list changes made in each version of the opennms cookbook.
 - [Ronny Trommer] - Changed receipe dependency from postgresql to postgresql::server
 - [Ronny Trommer] - Renamed to opennms-light, aiming for minimal config and working with stable,testing and unstable
 
-1.0.0
+1.0.1
 -----
-- [Ronny Trommer] - Added support for changin install mirror for APT and YUM as parameter
-- [Ronny Trommer] - Introducing version tag
+- [Alejandro Galue] - Fix rrd-configuration.properties to use rrd.interfaceJar variable
 
+1.0.2
+-----
+- [Ronny Trommer] - Added support for different Ubuntu mirror settings
+- [Ronny Trommer] - Removed recipes for java and postgres in test kitchen, included in the opennms-light repo
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.

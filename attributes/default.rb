@@ -1,3 +1,7 @@
+# Ubuntu mirror settings
+default['ubuntu']['archive_url'] = 'http://us.archive.ubuntu.com/ubuntu'
+default['ubuntu']['include_source_packages'] = false
+
 # Java default settings
 default['java']['install_flavor'] = 'openjdk'
 default['java']['jdk_version'] = '7'
