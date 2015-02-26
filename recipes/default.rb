@@ -10,7 +10,6 @@
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
-  home_dir = "/opt/opennms"
   template "/etc/yum.repos.d/opennms-rhel6.repo" do
     source "opennms.yum.repo.erb"
     owner "root"
@@ -29,7 +28,6 @@ when "rhel"
 when "debian"
   include_recipe 'ubuntu'
 
-  home_dir = "/usr/share/opennms"
   template "/etc/apt/sources.list.d/opennms.list" do
     source "opennms.list.erb"
     owner "root"
@@ -67,7 +65,7 @@ end
 
 # Set Java environment for OpenNMS
 execute "Setup opennms java" do
-  command "#{home_dir}/bin/runjava -s"
+  command "#{node['opennms']['home']}/bin/runjava -s"
   action :run
 end
 
@@ -78,7 +76,7 @@ end
   "opennms-datasources.xml" => "opennms-datasources.xml.erb",
   "provisiond-configuration.xml" => "provisiond-configuration.xml.erb"
 }.each do |dest, source|
-  template "#{home_dir}/etc/#{dest}" do
+  template "#{node['opennms']['home']}/etc/#{dest}" do
     source "#{source}"
     owner "root"
     group "root"
@@ -88,7 +86,7 @@ end
 
 # Install OpenNMS database schema
 execute "Initialize OpenNMS database and libraries" do
-  command "#{home_dir}/bin/install -dis"
+  command "#{node['opennms']['home']}/bin/install -dis"
   action :run
 end
 
