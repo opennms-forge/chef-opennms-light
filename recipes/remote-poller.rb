@@ -2,7 +2,7 @@
 # Cookbook Name:: remote-poller
 # Recipe:: default
 #
-# Copyright 2014, The OpenNMS Group, Inc.
+# Copyright 2015, The OpenNMS Group, Inc.
 #
 # License GPLv3
 #

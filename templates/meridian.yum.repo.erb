@@ -1,0 +1,5 @@
+[meridian]
+name=Meridian for Red Hat Enterprise Linux and CentOS
+baseurl=https://<%= node['meridian']['repository']['user'] %>:<%= node['meridian']['repository']['password']%>@<%= node['opennms']['repository']['yum'] %>/packages/<%= node['opennms']['release'] %>/rhel$releasever
+gpgcheck=1
+gpgkey=http://yum.opennms.org/OPENNMS-GPG-KEY

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: opennms
-# Recipe:: default
+# Recipe:: meridian
 #
 # Copyright 2015, The OpenNMS Group, Inc.
 #
@@ -10,43 +10,19 @@
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
-  template "/etc/yum.repos.d/opennms-rhel6.repo" do
-    source "opennms.yum.repo.erb"
+  template "/etc/yum.repos.d/meridian.repo" do
+    source "meridian.yum.repo.erb"
     owner "root"
     group "root"
     mode "0644"
   end
 
   remote_file "/etc/yum.repos.d/OPENNMS-GPG-KEY" do
-    source "http://#{node['opennms']['repository']['yum']}/OPENNMS-GPG-KEY"
+    source "http://yum.opennms.org/OPENNMS-GPG-KEY"
   end
 
   execute "Update yum repostory" do
     command "yum -y update"
-  end
-# Install aptitude repository on Debian family
-when "debian"
-  include_recipe 'ubuntu'
-
-  template "/etc/apt/sources.list.d/opennms.list" do
-    source "opennms.list.erb"
-    owner "root"
-    group "root"
-    mode "0644"
-  end
-
-  remote_file "#{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY" do
-    source "http://#{node['opennms']['repository']['apt']}/OPENNMS-GPG-KEY"
-  end
-
-  execute "Install OpenNMS apt GPG-key" do
-    command "sudo apt-key add #{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY"
-    action :run
-  end
-
-  execute "Update apt repository" do
-    command "aptitude update"
-    action :run
   end
 end
 
@@ -55,7 +31,7 @@ include_recipe "java"
 include_recipe "postgresql::server"
 
 # Install OpenNMS and Java-RRDtool library
-["opennms",
+["meridian",
  "jrrd",
  "rrdtool"].each do |package_name|
   package "#{package_name}" do
@@ -91,6 +67,6 @@ execute "Initialize OpenNMS database and libraries" do
 end
 
 # Install opennms as service and set runlevel
-service "opennms" do
+service "meridian" do
   action [:enable, :start]
 end
