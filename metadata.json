@@ -13,7 +13,6 @@
     "fedora": ">= 0.0.0"
   },
   "dependencies": {
-    "java": ">= 0.0.0",
     "postgresql": ">= 0.0.0"
   },
   "recommendations": {
@@ -33,5 +32,5 @@
   "recipes": {
     "opennms": "Installs open source enterprise network management platform OpenNMS"
   },
-  "version": "0.2.5"
+  "version": "0.2.6"
 }

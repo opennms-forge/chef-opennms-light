@@ -1,7 +1,3 @@
-# Java default settings
-override['java']['install_flavor'] = 'openjdk'
-override['java']['jdk_version'] = '7'
-
 override['postgresql']['password']['postgres'] = 'opennms_pg'
 override['postgresql']['pg_hba'] = [
   {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
