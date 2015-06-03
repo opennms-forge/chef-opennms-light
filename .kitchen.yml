@@ -19,16 +19,6 @@ platforms:
       opennms:
         home: /usr/share/opennms
 
-  - name: ubuntu-12.04
-    attributes:
-      opennms:
-        home: /usr/share/opennms
-
-  - name: centos-6.5
-    attributes:
-      opennms:
-        home: /opt/opennms
-
   - name: centos-7.0
     attributes:
       opennms:
@@ -37,12 +27,13 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[java]
       - recipe[postgresql::server]
       - recipe[opennms-light::default]
     attributes:
+      ubuntu:
+        archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
-        release: snapshot
+        release: stable
         repository:
           yum: yum.opennms.eu
           apt: debian.opennms.eu
@@ -52,9 +43,8 @@ suites:
       - recipe[java]
       - recipe[opennms-light::remote-poller]
     attributes:
-      java:
-        install_flavor: openjdk
-        jdk_version: 7
+      ubuntu:
+        archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
         release: stable
         home: /usr/share/opennms
