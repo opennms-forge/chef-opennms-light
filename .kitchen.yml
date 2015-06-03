@@ -27,10 +27,13 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[postgresql::server]
       - recipe[opennms-light::default]
     attributes:
+      ubuntu:
+        archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
-        release: snapshot
+        release: stable
         repository:
           yum: yum.opennms.eu
           apt: debian.opennms.eu
@@ -40,9 +43,8 @@ suites:
       - recipe[java]
       - recipe[opennms-light::remote-poller]
     attributes:
-      java:
-        install_flavor: openjdk
-        jdk_version: 7
+      ubuntu:
+        archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
         release: stable
         home: /usr/share/opennms

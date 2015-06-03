@@ -10,6 +10,7 @@
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
+  home_dir = "/opt/opennms"
   template "/etc/yum.repos.d/opennms-rhel6.repo" do
     source "opennms.yum.repo.erb"
     owner "root"
@@ -27,7 +28,7 @@ when "rhel"
 # Install aptitude repository on Debian family
 when "debian"
   include_recipe 'ubuntu'
-
+  home_dir = "/usr/share/opennms"
   template "/etc/apt/sources.list.d/opennms.list" do
     source "opennms.list.erb"
     owner "root"
@@ -48,11 +49,33 @@ when "debian"
     command "aptitude update"
     action :run
   end
+
+  # Accept Oracle License agreement
+  execute "set-license-selected" do
+    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections";
+    action :run
+  end
+
+  execute "set-license-seen" do
+    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections";
+    action :run
+  end
+
+  execute "set opennms db noinstall" do
+    command "echo \"opennmsdb opennms-db/noinstall string ok\" | debconf-set-selections";
+    action :run
+  end
+
+  execute "set iplike noinstall" do
+    command "export SKIP_IPLIKE_INSTALL=true";
+    action :run
+  end
 end
 
-# Install basic dependencies
-include_recipe "java"
-include_recipe "postgresql::server"
+# Install Oracle 8 JRE
+package "oracle-java8-jre" do
+  action :install
+end
 
 # Install OpenNMS and Java-RRDtool library
 ["opennms",
@@ -65,7 +88,7 @@ end
 
 # Set Java environment for OpenNMS
 execute "Setup opennms java" do
-  command "#{node['opennms']['home']}/bin/runjava -s"
+  command "#{home_dir}/bin/runjava -s"
   action :run
 end
 
@@ -76,7 +99,7 @@ end
   "opennms-datasources.xml" => "opennms-datasources.xml.erb",
   "provisiond-configuration.xml" => "provisiond-configuration.xml.erb"
 }.each do |dest, source|
-  template "#{node['opennms']['home']}/etc/#{dest}" do
+  template "#{home_dir}/etc/#{dest}" do
     source "#{source}"
     owner "root"
     group "root"
@@ -86,7 +109,7 @@ end
 
 # Install OpenNMS database schema
 execute "Initialize OpenNMS database and libraries" do
-  command "#{node['opennms']['home']}/bin/install -dis"
+  command "#{home_dir}/bin/install -dis"
   action :run
 end
 

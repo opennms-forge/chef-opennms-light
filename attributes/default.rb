@@ -1,13 +1,5 @@
-# Ubuntu mirror settings
-default['ubuntu']['archive_url'] = 'http://us.archive.ubuntu.com/ubuntu'
-default['ubuntu']['include_source_packages'] = false
-
-# Java default settings
-default['java']['install_flavor'] = 'openjdk'
-default['java']['jdk_version'] = '7'
-
-default['postgresql']['password']['postgres'] = 'opennms_pg'
-default['postgresql']['pg_hba'] = [
+override['postgresql']['password']['postgres'] = 'opennms_pg'
+override['postgresql']['pg_hba'] = [
   {:type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'md5'},
   {:type => 'host', :db => 'all', :user => 'all', :addr => '::1/128', :method => 'md5'}
 ]
