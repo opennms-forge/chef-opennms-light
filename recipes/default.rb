@@ -7,6 +7,8 @@
 # License GPLv3
 #
 
+include_recipe 'postgresql::server'
+
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
