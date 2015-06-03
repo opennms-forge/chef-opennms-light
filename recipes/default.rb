@@ -50,6 +50,37 @@ when "debian"
     command "aptitude update"
     action :run
   end
+
+  # Accept Oracle License agreement
+  execute "set-license-selected" do
+    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections";
+    action :run
+  end
+
+  execute "set-license-seen" do
+    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections";
+    action :run
+  end
+
+  execute "set-license-seen" do
+    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections";
+    action :run
+  end
+
+  execute "set opennms db noinstall" do
+    command "echo \"opennmsdb opennms-db/noinstall string ok\" | debconf-set-selections";
+    action :run
+  end
+
+  execute "set iplike noinstall" do
+    command "export SKIP_IPLIKE_INSTALL=true";
+    action :run
+  end
+end
+
+# Install Oracle 8 JRE
+package "oracle-java8-jre" do
+  action :install
 end
 
 # Install OpenNMS and Java RRDtool library
