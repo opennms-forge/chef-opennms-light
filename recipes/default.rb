@@ -27,6 +27,12 @@ when "rhel"
   execute "Update yum repostory" do
     command "yum -y update"
   end
+
+  # Install Oracle 8 JRE
+  package "jdk1.8.0_45" do
+    action :install
+  end
+
 # Install aptitude repository on Debian family
 when "debian"
   include_recipe 'ubuntu'
@@ -72,11 +78,11 @@ when "debian"
     command "export SKIP_IPLIKE_INSTALL=true";
     action :run
   end
-end
 
-# Install Oracle 8 JRE
-package "oracle-java8-jre" do
-  action :install
+  # Install Oracle 8 JRE
+  package "oracle-java8-jre" do
+    action :install
+  end
 end
 
 # Install OpenNMS and Java-RRDtool library
