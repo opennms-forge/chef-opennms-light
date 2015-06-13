@@ -9,11 +9,6 @@ default['opennms']['release'] = 'stable'
 default['opennms']['repository']['yum'] = 'yum.opennms.org'
 default['opennms']['repository']['apt'] = 'debian.opennms.org'
 
-# TODO: Allow Java remote debugging on port 8001: true / false
-# I don't know how to configure the "service" correctly to restart opennms with -t and having
-# an idempotent cookbook.
-# default['opennms']['jpda'] = 'false'
-
 # Postgres admin settings
 default['opennms']['postgres']['admin'] = 'postgres'
 
@@ -46,36 +41,78 @@ default['opennms']['rrd']['usetcp'] = 'false'
 default['opennms']['rrd']['tcp']['host'] = ''
 default['opennms']['rrd']['tcp']['port'] = ''
 
-# OpenNMS RRD/JRobin settings
-default['opennms']['storeByGroup'] = 'false'
-default['opennms']['storeByForeignSource'] = 'false'
+## java.conf
 
 # Start service and Java environment
 default['opennms']['java_heap_space'] = '1024'
 default['opennms']['start_timeout'] = '0'
 
-# Jetty options
+## opennms.properties
+
+# General
+default['opennms']['disableLoginSuccessEvent'] = 'false'
+default['opennms']['propertiesCache']['enableCheckFileModified'] = 'false'
+
+# ICMP
+# -- unset --
+
+# SNMP
+default['opennms']['snmp']['strategyClass'] = 'org.opennms.netmgt.snmp.snmp4j.Snmp4JStrategy'
+default['opennms']['snmp4j']['forwardRuntimeExceptions'] = 'false'
+
+# Data Collection
+default['opennms']['storeByGroup'] = 'false'
+default['opennms']['storeByForeignSource'] = 'false'
+default['opennms']['snmpCollector']['forceRescan'] = 'false'
+default['opennms']['snmpCollector']['limitCollectionToInstances'] = 'false'
+
+# Trouble Ticketing
+# -- unset --
+
+# RTC IPC
+default['opennms']['rtc']['client']['httpPostBaseUrl'] = 'http://localhost:8980/opennms/rtc/post'
+default['opennms']['rtc']['client']['httpPostUsername'] = 'rtc'
+default['opennms']['rtc']['client']['httpPostPassword'] = 'rtc'
+default['opennms']['rtc']['event']['proxyHost'] = '127.0.0.1'
+default['opennms']['rtc']['event']['proxyPort'] = '5817'
+default['opennms']['rtc']['event']['proxyTimeout'] = '2000'
+
+# Map IPC
+default['opennms']['map']['client']['httpPostBaseUrl'] = 'http://localhost:8980/opennms/map/post'
+default['opennms']['map']['client']['httpPostUsername'] = 'map'
+default['opennms']['map']['client']['httpPostPassword'] = 'map'
+
+# Jetty
 default['opennms']['jetty']['port'] = '8980'
-default['opennms']['web']['baseurl'] = 'http://%x%c/'
 default['opennms']['jetty']['requestHeaderSize'] = '4000'
 default['opennms']['jetty']['maxFormKeys'] = '2000'
+default['opennms']['web']['baseurl'] = 'http://%x%c/'
 
-# Web UI display settings
-default['opennms']['propertiesCache']['enableCheckFileModified'] = 'false'
-default['opennms']['webaclsEnabled'] = 'false'
+# Jetty HTTPS
+# -- unset --
 
+# Provisiond
+default['opennms']['provisiond']['enableDiscovery'] = 'true'
+default['opennms']['provisiond']['enableDeletionOfRequisitionedEntities'] = 'false'
+default['opennms']['provisiond']['scheduleRescanForExistingNodes'] = 'true'
+default['opennms']['provisiond']['scheduleRescanForUpdatedNodes'] = 'true'
+
+# Web UI
 default['opennms']['assets']['allowHtmlFields'] = 'comments, description'
+default['opennms']['webaclsEnabled'] = 'false'
 default['opennms']['eventlist']['acknowledge'] = 'false'
 default['opennms']['eventlist']['showCount'] = 'false'
-
 default['opennms']['nodesWithOutages']['count'] = '12'
 default['opennms']['nodesWithOutages']['show'] = 'true'
-
 default['opennms']['nodesWithProblems']['count'] = '16'
-default['opennms']['nodesWithProblems']['show'] = 'false'
+default['opennms']['nodesWithProblems']['show'] = 'true'
+default['opennms']['nodeStatusBar']['show'] = 'true'
 
-default['opennms']['nodeStatusBar']['show'] = 'false'
-default['opennms']['disableLoginSuccessEvent'] = 'false'
+# Dashboard and Surveillance View
+# -- unset --
+
+# Graphing
+# -- unset --
 
 # Mapping and Geocoding
 default['opennms']['maptype'] = 'OpenLayers'
@@ -87,35 +124,24 @@ default['opennms']['geocoder']['minimumQuality'] = 'ZIP'
 default['opennms']['geocoder']['nominatimEmail'] = ''
 default['opennms']['openlayersUrl'] = 'http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png'
 
+# Remote Poller
+# -- unset --
+
 # Reporting
 default['opennms']['ksc']['graphsPerLine'] = '1'
 
-# Eventd IPC
-default['opennms']['rtc']['event']['proxyHost'] = '127.0.0.1'
-default['opennms']['rtc']['event']['proxyPort'] = '5817'
-default['opennms']['rtc']['event']['proxyTimeout'] = '2000'
-default['opennms']['rtc']['client']['httpPostBaseUrl'] = 'http://localhost:8980/opennms/rtc/post'
-default['opennms']['rtc']['client']['httpPostUsername'] = 'rtc'
-default['opennms']['rtc']['client']['httpPostPassword'] = 'rtc'
+# Rancid Integration
+# -- unset --
 
-# Map IPC
-default['opennms']['map']['client']['httpPostBaseUrl'] = 'http://localhost:8980/opennms/map/post'
-default['opennms']['map']['client']['httpPostUsername'] = 'map'
-default['opennms']['map']['client']['httpPostPassword'] = 'map'
+# Asterisk AGI Support
+# -- unset --
 
-# SNMP implementation
-default['opennms']['snmp']['strategyClass'] = 'org.opennms.netmgt.snmp.snmp4j.Snmp4JStrategy'
-default['opennms']['snmp4j']['forwardRuntimeExceptions'] = 'false'
+# SMS Gateway Setup
+# -- unset --
 
-# SNMP Collector settings
-default['opennms']['snmpCollector']['forceRescan'] = 'false'
-default['opennms']['snmpCollector']['limitCollectionToInstances'] = 'false'
+## provisiond-configuration.xml
 
 # Provisiond settings
-default['opennms']['provisiond']['enableDiscovery'] = 'true'
-default['opennms']['provisiond']['enableDeletionOfRequisitionedEntities'] = 'false'
-default['opennms']['provisiond']['scheduleRescanForExistingNodes'] = 'true'
-default['opennms']['provisiond']['scheduleRescanForUpdatedNodes'] = 'true'
 default['opennms']['provisiond']['importThreads'] = '8'
 default['opennms']['provisiond']['scanThreads'] = '10'
 default['opennms']['provisiond']['rescanThreads'] = '10'

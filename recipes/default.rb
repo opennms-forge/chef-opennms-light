@@ -7,6 +7,7 @@
 # License GPLv3
 #
 
+include_recipe 'java'
 include_recipe 'postgresql::server'
 
 case node['platform_family']
@@ -27,12 +28,7 @@ when "rhel"
   execute "Update yum repostory" do
     command "yum -y update"
   end
-
-  # Install Oracle 8 JRE
-  package "jdk1.8.0_45" do
-    action :install
-  end
-
+  
 # Install aptitude repository on Debian family
 when "debian"
   include_recipe 'ubuntu'
@@ -58,17 +54,6 @@ when "debian"
     action :run
   end
 
-  # Accept Oracle License agreement
-  execute "set-license-selected" do
-    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections";
-    action :run
-  end
-
-  execute "set-license-seen" do
-    command "/bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections";
-    action :run
-  end
-
   execute "set opennms db noinstall" do
     command "echo \"opennmsdb opennms-db/noinstall string ok\" | debconf-set-selections";
     action :run
@@ -77,11 +62,6 @@ when "debian"
   execute "set iplike noinstall" do
     command "export SKIP_IPLIKE_INSTALL=true";
     action :run
-  end
-
-  # Install Oracle 8 JRE
-  package "oracle-java8-jre" do
-    action :install
   end
 end
 
