@@ -91,6 +91,7 @@ end
  "rrdtool"].each do |package_name|
   package "#{package_name}" do
     action :install
+    timeout 2400
   end
 end
 
