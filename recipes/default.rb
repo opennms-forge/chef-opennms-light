@@ -7,8 +7,6 @@
 # License GPLv3
 #
 
-include_recipe 'postgresql::server'
-
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
@@ -37,6 +35,15 @@ when "rhel"
 when "debian"
   include_recipe 'ubuntu'
   home_dir = "/usr/share/opennms"
+
+  execute "Update apt repostory" do
+    command "apt-get update"
+  end
+
+  package "software-properties-common" do
+    action :install
+  end
+
   template "/etc/apt/sources.list.d/opennms.list" do
     source "opennms.list.erb"
     owner "root"
@@ -50,6 +57,11 @@ when "debian"
 
   execute "Install OpenNMS apt GPG-key" do
     command "sudo apt-key add #{Chef::Config['file_cache_path']}/OPENNMS-GPG-KEY"
+    action :run
+  end
+
+  execute "Add Webupd8 repository" do
+    command "sudo add-apt-repository ppa:webupd8team/java"
     action :run
   end
 
@@ -69,6 +81,8 @@ when "debian"
     action :run
   end
 
+  include_recipe 'postgresql::server'
+
   execute "set opennms db noinstall" do
     command "echo \"opennmsdb opennms-db/noinstall string ok\" | debconf-set-selections";
     action :run
@@ -80,7 +94,7 @@ when "debian"
   end
 
   # Install Oracle 8 JRE
-  package "oracle-java8-jre" do
+  package "oracle-java8-installer" do
     action :install
   end
 end

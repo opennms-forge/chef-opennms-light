@@ -27,32 +27,30 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[postgresql::server]
       - recipe[opennms-light::default]
     attributes:
       ubuntu:
         archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
-        release: stable
+        release: snapshot
         repository:
-          yum: yum.opennms.eu
-          apt: debian.opennms.eu
+          yum: yum.opennms.org
+          apt: debian.opennms.org
 
   - name: remote-poller
     run_list:
-      - recipe[java]
       - recipe[opennms-light::remote-poller]
     attributes:
       ubuntu:
         archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
-        release: stable
+        release: snapshot
         home: /usr/share/opennms
         location: Germany
         baseurl: http://192.168.0.1:8980/opennms-remoting
         repository:
-          yum: yum.opennms.eu
-          apt: debian.opennms.eu
+          yum: yum.opennms.org
+          apt: debian.opennms.org
   - name: meridian
     data_bags_path: "test/integration/data_bags"
     run_list:
