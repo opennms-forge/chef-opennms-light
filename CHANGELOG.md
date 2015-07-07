@@ -29,6 +29,12 @@ This file is used to list changes made in each version of the opennms cookbook.
 - [Ronny Trommer] - Added support for different Ubuntu mirror settings
 - [Ronny Trommer] - Removed recipes for java and postgres in test kitchen, included in the opennms-light repo
 
+1.0.3
+-----
+- [Ronny Trommer] - Moved postgres cookbook behind apt-get update to prevent unreachable ubuntu repositories
+- [Ronny Trommer] - Changed Oracle install package to be compatible with non existing Oracle package in branches
+
+
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
