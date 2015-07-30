@@ -34,6 +34,9 @@ This file is used to list changes made in each version of the opennms cookbook.
 - [Ronny Trommer] - Moved postgres cookbook behind apt-get update to prevent unreachable ubuntu repositories
 - [Ronny Trommer] - Changed Oracle install package to be compatible with non existing Oracle package in branches
 
+1.0.4
+-----
+- [Ronny Trommer] - Update configuration files to HORIZON 17
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
