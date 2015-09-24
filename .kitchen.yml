@@ -33,9 +33,6 @@ suites:
         archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
         release: snapshot
-        repository:
-          yum: yum.opennms.org
-          apt: debian.opennms.org
 
   - name: remote-poller
     run_list:
@@ -48,24 +45,3 @@ suites:
         home: /usr/share/opennms
         location: Germany
         baseurl: http://192.168.0.1:8980/opennms-remoting
-        repository:
-          yum: yum.opennms.org
-          apt: debian.opennms.org
-  - name: meridian
-    data_bags_path: "test/integration/data_bags"
-    run_list:
-      - recipe[opennms-light::meridian]
-    attributes:
-      opennms:
-        release: testing
-        repository:
-          yum: meridian.opennms.com
-        rrd:
-          strategyClass: org.opennms.netmgt.rrd.rrdtool.JniRrdStrategy
-          interfaceJar: /usr/share/java/jrrd.jar
-        library:
-          jrrd: /usr/lib/jni/libjrrd.so
-      meridian:
-        repository:
-          user: myuser
-          password: mypass
