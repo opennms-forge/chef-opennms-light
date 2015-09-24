@@ -10,7 +10,7 @@
 case node['platform']
 when 'redhat', 'centos', 'fedora'
   execute 'Install OpenNMS yum repository' do
-    command "rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
+    command "rpm -Uvh http://#{node['opennms']['repository']['yum']}/repofiles/opennms-repo-#{node['opennms']['release']}-rhel6.noarch.rpm"
     not_if { ::File.exist?('/etc/yum.repos.d/opennms-#{node[:opennms][:release]}-rhel6.repo') }
   end
 
@@ -29,12 +29,12 @@ when 'debian', 'ubuntu'
   end
 
   execute "Install OpenNMS apt repository" do
-    command "add-apt-repository 'deb http://debian.opennms.org #{node['opennms']['release']} main'"
+    command "add-apt-repository 'deb #{node['opennms']['repository']['apt']} #{node['opennms']['release']} main'"
     action :run
   end
 
   remote_file "#{Chef::Config[:file_cache_path]}/OPENNMS-GPG-KEY" do
-    source "http://debian.opennms.org/OPENNMS-GPG-KEY"
+    source "http://#{node['opennms']['repository']['apt']}/OPENNMS-GPG-KEY"
   end
 
   execute 'Install OpenNMS apt GPG-key' do

@@ -110,14 +110,14 @@ The default configuration installs latest OpenNMS stable from official OpenNMS r
   <tr>
     <td><tt>['opennms']['repository']['yum']</tt></td>
     <td>String</td>
-    <td>OpenNMS YUM repository server `yum.opennms.org` or `yum.opennms.eu`.</td>
-    <td><tt>yum.opennms.org</tt></td>
+    <td>OpenNMS YUM repository server `yum.mirrors.opennms.org` or `yum.opennms.eu`.</td>
+    <td><tt>yum.mirrors.opennms.org</tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['repository']['apt']</tt></td>
     <td>String</td>
-    <td>OpenNMS APT repository server `debian.opennms.org` or `debian.opennms.eu`.</td>
-    <td><tt>debian.opennms.org</tt></td>
+    <td>OpenNMS APT repository server `debian.mirrors.opennms.org` or `debian.opennms.eu`.</td>
+    <td><tt>debian.mirrors.opennms.org</tt></td>
   </tr>
   <tr>
     <td><tt>['opennms']['postgres']['admin']</tt></td>

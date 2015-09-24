@@ -38,6 +38,11 @@ This file is used to list changes made in each version of the opennms cookbook.
 -----
 - [Ronny Trommer] - Update configuration files to HORIZON 17
 
+1.0.5   
+-----
+- [Ronn Trommer] - Changed repository to new mirror servers
+
+
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
