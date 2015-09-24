@@ -32,7 +32,7 @@ suites:
       ubuntu:
         archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
-        release: snapshot
+        release: stable
 
   - name: remote-poller
     run_list:
@@ -41,7 +41,7 @@ suites:
       ubuntu:
         archive_url: http://de.archive.ubuntu.com/ubuntu
       opennms:
-        release: snapshot
+        release: stable
         home: /usr/share/opennms
         location: Germany
         baseurl: http://192.168.0.1:8980/opennms-remoting

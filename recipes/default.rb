@@ -7,6 +7,8 @@
 # License GPLv3
 #
 
+include_recipe 'postgresql::server'
+
 case node['platform_family']
 # Install yum repository on Red Hat family linux
 when "rhel"
@@ -80,8 +82,6 @@ when "debian"
     command "/bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections";
     action :run
   end
-
-  include_recipe 'postgresql::server'
 
   execute "set opennms db noinstall" do
     command "echo \"opennmsdb opennms-db/noinstall string ok\" | debconf-set-selections";
